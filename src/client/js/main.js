@@ -1,5 +1,6 @@
 import "../scss/styles.scss";
 import Home from "./components/Home.js";
+import MusicPlayer from "./components/MusicPlayer.js";
 import Component from "./core/Component.js";
 import { $ } from "./utils/dom.js";
 
@@ -23,6 +24,7 @@ class App extends Component {
     const path = window.location.pathname;
     const pageComponent = this.router[path];
     new pageComponent($("main"));
+    new MusicPlayer($("#music-player"));
   }
 
   setEvent() {
