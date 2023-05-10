@@ -13,6 +13,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/static", express.static("assets"));
 
+app.get("*", (req, res) => {
+  return res.render("layout.pug");
+});
+
 app.get("/", (req, res) => {
   return res.render("layout.pug");
 });
