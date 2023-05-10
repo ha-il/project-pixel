@@ -9,6 +9,7 @@ class App extends Component {
     this.router = {
       "/": Home,
       "/login": Home,
+      "/signup": Home,
     };
     window.addEventListener("popstate", () => {
       this.render();

@@ -32,6 +32,10 @@ class Home extends Component {
         $("#modal").classList.remove("hidden");
         new Modal($("#modal"));
       }
+      if (window.location.pathname === "/signup") {
+        $("#modal").classList.remove("hidden");
+        new Modal($("#modal"));
+      }
     });
   }
 }

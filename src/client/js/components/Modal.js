@@ -1,6 +1,7 @@
 import Component from "../core/Component.js";
 import { $ } from "../utils/dom.js";
 import Login from "./modals/Login.js";
+import Signup from "./modals/Singup.js";
 
 class Modal extends Component {
   template() {
@@ -12,6 +13,9 @@ class Modal extends Component {
   addComponent() {
     if (window.location.pathname === "/login") {
       new Login($(".modal-content"));
+    }
+    if (window.location.pathname === "/signup") {
+      new Signup($(".modal-content"));
     }
   }
 
