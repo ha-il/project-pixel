@@ -1,4 +1,6 @@
 import Component from "../../core/Component.js";
+import { $ } from "../../utils/dom.js";
+import Signup from "./Singup.js";
 
 class Login extends Component {
   template() {
@@ -29,10 +31,23 @@ class Login extends Component {
         </form>
         <div class="link-container">
           <span>계정이 없나요?</span>
-          <a href="/signup">가입하기</a>
+          <a href="/signup" class="form-link">가입하기</a>
         </div>
       </div>
     `;
+  }
+  setEvent() {
+    $(".form-link").addEventListener("click", (e) => {
+      e.preventDefault();
+      window.history.pushState(null, "", "/signup");
+      new Signup(this.$target);
+    });
+    window.addEventListener("DOMContentLoaded", (event) => {
+      if (window.location.pathname === "/signup") {
+        $("#modal").classList.remove("hidden");
+        new Signup(this.$target);
+      }
+    });
   }
 }
 
