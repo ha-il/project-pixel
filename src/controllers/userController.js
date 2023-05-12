@@ -52,3 +52,9 @@ export const login = async (req, res) => {
     profileName,
   });
 };
+
+export const logout = (req, res) => {
+  req.session.destroy();
+
+  return res.sendStatus(200);
+};
