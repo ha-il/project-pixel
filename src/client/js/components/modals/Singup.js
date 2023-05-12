@@ -6,7 +6,7 @@ class Signup extends Component {
   template() {
     return `
       <div class="form-container">
-        <form method="POST">
+        <form method="POST" id="signup-form">
           <div class="form-input">
             <label for="username">어떤 사용자 이름을 사용하시겠어요?</label>
             <input id="username" name="username" type="text" placeholder="사용자 이름을 입력하세요" required>
@@ -19,10 +19,10 @@ class Signup extends Component {
           </div>
           <div class="form-input">
             <label for="password">비밀번호를 만드세요.</label>
-            <input id="password" name="password" type="password" placeholder="비밀번호를 만드세요" required>
+            <input id="password" name="password" type="password" placeholder="비밀번호를 입력하세요" required>
           </div>
           <div class="form-input">
-            <label for="passwordConfirm"></label>
+            <label for="passwordConfirm">비밀번호를 확인하세요.</label>
             <input id="passwordConfirm" name="passwordConfirm" type="password" placeholder="비밀번호를 다시 입력하세요" required>
           </div>
           <input type="submit" value="가입하기">
@@ -44,6 +44,26 @@ class Signup extends Component {
       if (window.location.pathname === "/login") {
         $("#modal").classList.remove("hidden");
         new Login(this.$target);
+      }
+    });
+    this.$target.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData($("#signup-form"));
+      const serializedFormData = new URLSearchParams(formData).toString();
+      const response = await fetch(`/api/users/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: serializedFormData,
+      });
+
+      if (response.ok) {
+        $("#modal").classList.remove("hidden");
+        new Login(this.$target);
+      } else {
+        const data = await response.json();
+        console.log(data.errorMessage);
       }
     });
   }
