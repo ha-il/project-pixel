@@ -6,7 +6,8 @@ class Login extends Component {
   template() {
     return `
       <div class="form-container">
-        <form method="post">
+        <div class="error_message"></div>
+        <form method="post" id="login-form">
           <div class="form-input">
             <label for="username">사용자 이름</label>
             <input
@@ -42,10 +43,32 @@ class Login extends Component {
       window.history.pushState(null, "", "/signup");
       new Signup(this.$target);
     });
+
     window.addEventListener("DOMContentLoaded", (event) => {
       if (window.location.pathname === "/signup") {
         $("#modal").classList.remove("hidden");
         new Signup(this.$target);
+      }
+    });
+
+    $("#login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData($("#login-form"));
+      const serializedFormData = new URLSearchParams(formData).toString();
+      const response = await fetch(`/api/users/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: serializedFormData,
+      });
+
+      if (response.ok) {
+        $("#modal").classList.add("hidden");
+        window.history.pushState(null, "", "/");
+      } else {
+        const data = await response.json();
+        $(".error_message").innerText = `${data.errorMessage}`;
       }
     });
   }
