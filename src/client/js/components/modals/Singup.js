@@ -6,6 +6,7 @@ class Signup extends Component {
   template() {
     return `
       <div class="form-container">
+        <div class="error_message"></div>
         <form method="POST" id="signup-form">
           <div class="form-input">
             <label for="username">어떤 사용자 이름을 사용하시겠어요?</label>
@@ -46,7 +47,7 @@ class Signup extends Component {
         new Login(this.$target);
       }
     });
-    this.$target.addEventListener("submit", async (e) => {
+    $("#signup-form").addEventListener("submit", async (e) => {
       e.preventDefault();
       const formData = new FormData($("#signup-form"));
       const serializedFormData = new URLSearchParams(formData).toString();
@@ -60,10 +61,11 @@ class Signup extends Component {
 
       if (response.ok) {
         $("#modal").classList.remove("hidden");
+        window.history.pushState(null, "", "/login");
         new Login(this.$target);
       } else {
         const data = await response.json();
-        console.log(data.errorMessage);
+        $(".error_message").innerText = `${data.errorMessage}`;
       }
     });
   }
