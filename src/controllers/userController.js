@@ -46,8 +46,9 @@ export const login = async (req, res) => {
   req.session.isLoggedIn = true;
   req.session.loggedInUser = user;
 
-  res.cookie("isLoggedIn", true);
-  res.cookie("loggedInUser", JSON.stringify(user));
+  const { profileName } = user;
 
-  return res.sendStatus(200);
+  return res.status(200).json({
+    profileName,
+  });
 };
