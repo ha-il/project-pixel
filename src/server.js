@@ -1,5 +1,6 @@
 import express from "express";
 import logger from "morgan";
+import apiRouter from "./routers/apiRouter.js";
 
 const app = express();
 
@@ -13,11 +14,13 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/static", express.static("assets"));
 
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   return res.render("layout.pug");
 });
 
-app.get("/", (req, res) => {
+app.use("/api", apiRouter);
+
+app.get("*", (req, res) => {
   return res.render("layout.pug");
 });
 
