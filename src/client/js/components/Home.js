@@ -1,6 +1,7 @@
 import Component from "../core/Component.js";
 import { $ } from "../utils/dom.js";
 import Modal from "./Modal.js";
+import Bed from "./furnitures/bed.js";
 
 class Home extends Component {
   template() {
@@ -25,6 +26,9 @@ class Home extends Component {
         window.history.pushState(null, "", "/login");
         $("#modal").classList.remove("hidden");
         new Modal($("#modal"));
+      }
+      if (e.target.id === "bed") {
+        new Bed();
       }
     });
     window.addEventListener("DOMContentLoaded", (event) => {
