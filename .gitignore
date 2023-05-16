@@ -7,3 +7,4 @@
 domain.md
 .prettierignore
 /markdown
+*pem
