@@ -1,8 +1,10 @@
 import "../scss/styles.scss";
 import Home from "./components/Home.js";
 import MusicPlayer from "./components/MusicPlayer.js";
+import Playlist from "./components/Playlist";
 import Component from "./core/Component.js";
 import { $ } from "./utils/dom.js";
+import { matchRoute } from "./utils/routerHelper";
 
 class App extends Component {
   initRouter() {
@@ -10,6 +12,7 @@ class App extends Component {
       "/": Home,
       "/login": Home,
       "/signup": Home,
+      "/playlists/:id": Playlist,
     };
     window.addEventListener("popstate", () => {
       this.render();
@@ -23,9 +26,19 @@ class App extends Component {
     `;
   }
   addComponent() {
-    const path = window.location.pathname;
+    let path = window.location.pathname;
+    const isPlaylists = path.includes("playlists/");
+
+    if (isPlaylists) {
+      path = matchRoute(this.router, path);
+    }
+
     const pageComponent = this.router[path];
-    new pageComponent($("main"));
+    new pageComponent($("main"), {
+      initApp: ($app) => $app.init(),
+      $app: this,
+    });
+
     new MusicPlayer($("#music-player"));
   }
 

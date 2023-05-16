@@ -1,6 +1,7 @@
 import Component from "../core/Component.js";
 import { $ } from "../utils/dom.js";
 import Modal from "./Modal.js";
+import Cabinet from "./furnitures/Cabinet.js";
 import Bed from "./furnitures/bed.js";
 
 class Home extends Component {
@@ -18,6 +19,10 @@ class Home extends Component {
       <div id="modal" class="object hidden"></div>
     </div>
     `;
+  }
+  addComponent() {
+    const { initApp, $app } = this.props;
+    new Cabinet($("#cabinet"), { initApp, $app });
   }
 
   setEvent() {
