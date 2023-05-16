@@ -46,15 +46,14 @@ export const login = async (req, res) => {
   req.session.isLoggedIn = true;
   req.session.loggedInUser = user;
 
-  const { profileName } = user;
+  res.cookie("isLoggedIn", true);
 
-  return res.status(200).json({
-    profileName,
-  });
+  return res.sendStatus(200);
 };
 
 export const logout = (req, res) => {
   req.session.destroy();
+  res.clearCookie("isLoggedIn");
 
   return res.sendStatus(200);
 };
