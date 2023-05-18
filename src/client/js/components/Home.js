@@ -3,6 +3,7 @@ import { $ } from "../utils/dom.js";
 import Modal from "./Modal.js";
 import Cabinet from "./furnitures/Cabinet.js";
 import Bed from "./furnitures/bed.js";
+import Phone from "./Phone.js";
 
 class Home extends Component {
   template() {
@@ -17,6 +18,10 @@ class Home extends Component {
       <div id="coffee" class="object">커피</div>
       <div id="chair" class="object">의자</div>
       <div id="modal" class="object hidden"></div>
+      <div id="phone" class="object">아이폰</div>
+      <div id="phone-icon">
+        <i class="fa-solid fa-mobile-screen-button"></i>
+      </div>
     </div>
     `;
   }
@@ -34,6 +39,10 @@ class Home extends Component {
       }
       if (e.target.id === "bed") {
         new Bed();
+      }
+      if (e.target.closest("#phone-icon")) {
+        $("#phone").classList.toggle("visible");
+        new Phone($("#phone"));
       }
     });
     window.addEventListener("DOMContentLoaded", (event) => {
