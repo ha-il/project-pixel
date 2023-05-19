@@ -1,6 +1,6 @@
 import Component from "../../core/Component.js";
 import { $ } from "../../utils/dom.js";
-import MusicRegistration from "./MusicRegistration.js";
+import UrlRegistration from "./UrlRegistration.js";
 
 class PhoneHome extends Component {
   template() {
@@ -28,7 +28,7 @@ class PhoneHome extends Component {
       if (e.target.id === "playlist-creation") {
       }
       if (e.target.id === "music-registration") {
-        new MusicRegistration($(".phone-container"));
+        new UrlRegistration($(".phone-container"));
       }
     });
   }
