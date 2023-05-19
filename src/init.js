@@ -2,6 +2,7 @@ import "dotenv/config.js";
 import "./db.js";
 import "./models/User.js";
 import "./models/Music.js";
+import "./models/Playlist.js";
 import app from "./server.js";
 import https from "https";
 import fs from "fs";
