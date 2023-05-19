@@ -7,7 +7,7 @@ class MusicRegistrationForm extends Component {
     const { title, image, channelTitle } = this.props.musicData;
     return `
         <img class="thumbnails"
-        src=${image.url}
+        src="${image.url}"
         alt=""/>   
         <div class="form-input">
           <label for="title">음악 제목</label>
@@ -16,9 +16,9 @@ class MusicRegistrationForm extends Component {
             name="title"
             type="text"
             placeholder="음악 제목을 입력해주세요"
-            maxlength="20"
+            maxlength="30"
             required
-            value=${title}
+            value="${title}"
           />
         </div>
         <div class="form-input">
@@ -28,9 +28,9 @@ class MusicRegistrationForm extends Component {
             name="artist"
             type="text"
             placeholder="아티스트의 이름을 입력해주세요"
-            maxlength="20"
+            maxlength="30"
             required
-            value=${channelTitle}
+            value="${channelTitle}"
           />
         </div>
         <input type="submit" , value="음악 등록" />
@@ -40,6 +40,12 @@ class MusicRegistrationForm extends Component {
   setEvent() {
     $("#music-registration-form").addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      if ($("#title").value.length > 30) {
+        return ($(
+          "#music-registration-error"
+        ).innerText = `음악 제목은 30자까지 입력할 수 있습니다.`);
+      }
 
       const {
         id: youtubeId,
@@ -55,7 +61,7 @@ class MusicRegistrationForm extends Component {
         artist: $("#artist").value,
       });
 
-      const response = await fetch(`/api/musics/music`, {
+      const response = await fetch(`/api/musics`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
