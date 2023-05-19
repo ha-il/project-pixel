@@ -6,7 +6,7 @@ class Login extends Component {
   template() {
     return `
       <div class="form-container">
-        <div class="error_message"></div>
+        <div id="login-error" class="error_message"></div>
         <form method="post" id="login-form">
           <div class="form-input">
             <label for="username">사용자 이름</label>
@@ -68,7 +68,7 @@ class Login extends Component {
         window.history.pushState(null, "", "/");
       } else {
         const data = await response.json();
-        $(".error_message").innerText = `${data.errorMessage}`;
+        $("#login-error").innerText = `${data.errorMessage}`;
       }
     });
   }

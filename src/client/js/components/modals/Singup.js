@@ -6,7 +6,7 @@ class Signup extends Component {
   template() {
     return `
       <div class="form-container">
-        <div class="error_message"></div>
+        <div id="signup-error" class="error_message"></div>
         <form method="POST" id="signup-form">
           <div class="form-input">
             <label for="username">어떤 사용자 이름을 사용하시겠어요?</label>
@@ -65,7 +65,7 @@ class Signup extends Component {
         new Login(this.$target);
       } else {
         const data = await response.json();
-        $(".error_message").innerText = `${data.errorMessage}`;
+        $("#signup-error").innerText = `${data.errorMessage}`;
       }
     });
   }
