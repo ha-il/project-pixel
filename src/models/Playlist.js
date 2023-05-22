@@ -4,11 +4,11 @@ const playlistSchema = new mongoose.Schema({
   name: { type: String, required: true, minLength: 1, maxLength: 30 },
   description: { type: String, maxLength: 50 },
   owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
-  tracks: [
+  musics: [
     {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Track",
+      ref: "Music",
       default: [],
     },
   ],
