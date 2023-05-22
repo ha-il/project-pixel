@@ -25,3 +25,20 @@ export const registerMusic = async (req, res) => {
     });
   }
 };
+
+export const getChartMusics = async (req, res) => {
+  try {
+    const chartMusics = await Music.find({}).sort({ likeCount: -1 }).limit(10);
+    if (!chartMusics) {
+      return res.status(404).send({
+        errorMessage:
+          "등록된 트랙을 조회할 수 없어서 차트를 표시할 수 없습니다.",
+      });
+    }
+    return res.status(200).send(chartMusics);
+  } catch (error) {
+    return res.status(400).send("chart.pug", {
+      errorMessage: `차트를 불러오는 과정에서 오류가 발생했습니다.`,
+    });
+  }
+};
