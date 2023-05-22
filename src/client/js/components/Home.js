@@ -26,8 +26,9 @@ class Home extends Component {
     `;
   }
   addComponent() {
-    const { initApp, $app } = this.props;
-    new Cabinet($("#cabinet"), { initApp, $app });
+    new Cabinet($("#cabinet"), {
+      $main: this.$target,
+    });
   }
 
   setEvent() {

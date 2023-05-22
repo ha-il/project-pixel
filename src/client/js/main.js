@@ -34,10 +34,7 @@ class App extends Component {
     }
 
     const pageComponent = this.router[path];
-    new pageComponent($("main"), {
-      initApp: ($app) => $app.init(),
-      $app: this,
-    });
+    new pageComponent($("main"));
 
     new MusicPlayer($("#music-player"));
   }

@@ -1,4 +1,5 @@
 import Component from "../../core/Component.js";
+import Playlist from "../Playlist.js";
 
 class Cabinet extends Component {
   template() {
@@ -16,9 +17,9 @@ class Cabinet extends Component {
       e.preventDefault();
       if (e.target.classList.contains("playlist")) {
         const playlistId = e.target.textContent;
-        const { initApp, $app } = this.props;
         window.history.pushState(null, "", `/playlists/${playlistId}`);
-        initApp($app);
+        const { $main } = this.props;
+        new Playlist($main, { $main });
       }
     });
   }
