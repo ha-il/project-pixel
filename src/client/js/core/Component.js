@@ -11,6 +11,7 @@ class Component {
   init() {
     this.state = this.initState();
     this.initRouter();
+    this.fetchData();
     this.render();
     this.setEvent();
   }
@@ -22,6 +23,7 @@ class Component {
     return "";
   }
   addComponent() {}
+  fetchData() {}
   setEvent() {}
   render() {
     this.$target.innerHTML = this.template();
