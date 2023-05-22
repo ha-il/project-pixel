@@ -1,5 +1,6 @@
 import Component from "../../core/Component.js";
 import { $ } from "../../utils/dom.js";
+import PlaylistCreation from "./PlaylistCreation.js";
 import UrlRegistration from "./UrlRegistration.js";
 
 class PhoneHome extends Component {
@@ -26,6 +27,7 @@ class PhoneHome extends Component {
       if (e.target.id === "user-profile") {
       }
       if (e.target.id === "playlist-creation") {
+        new PlaylistCreation($(".phone-container"));
       }
       if (e.target.id === "music-registration") {
         new UrlRegistration($(".phone-container"));
