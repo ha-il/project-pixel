@@ -10,7 +10,8 @@ class Phone extends Component {
   }
 
   addComponent() {
-    new PhoneHome($(".phone-container"));
+    const { $main } = this.props;
+    new PhoneHome($(".phone-container"), { $main });
   }
 }
 

@@ -1,5 +1,6 @@
 import Component from "../../core/Component.js";
 import { $ } from "../../utils/dom.js";
+import Playlist from "../Playlist.js";
 import PhoneHome from "./PhoneHome.js";
 
 class PlaylistCreation extends Component {
@@ -59,9 +60,9 @@ class PlaylistCreation extends Component {
       const data = await response.json();
 
       if (response.ok) {
-        const { initApp, $app } = this.props;
+        const { $main } = this.props;
         window.history.pushState(null, "", `/playlists/${data.playlistId}`);
-        return initApp($app);
+        new Playlist($main, { $main });
       } else {
         return ($(
           "#playlist-creation-error"

@@ -27,7 +27,8 @@ class PhoneHome extends Component {
       if (e.target.id === "user-profile") {
       }
       if (e.target.id === "playlist-creation") {
-        new PlaylistCreation($(".phone-container"));
+        const { $main } = this.props;
+        new PlaylistCreation($(".phone-container"), { $main });
       }
       if (e.target.id === "music-registration") {
         new UrlRegistration($(".phone-container"));
