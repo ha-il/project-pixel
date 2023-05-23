@@ -64,8 +64,10 @@ class Login extends Component {
       });
 
       if (response.ok) {
+        const { renderHome } = this.props;
         $("#modal").classList.add("hidden");
         window.history.pushState(null, "", "/");
+        renderHome();
       } else {
         const data = await response.json();
         $("#login-error").innerText = `${data.errorMessage}`;

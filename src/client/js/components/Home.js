@@ -4,6 +4,7 @@ import Modal from "./Modal.js";
 import Cabinet from "./furnitures/Cabinet.js";
 import Bed from "./furnitures/bed.js";
 import Phone from "./Phone.js";
+import { getCookie } from "../utils/cookie.js";
 
 class Home extends Component {
   template() {
@@ -13,7 +14,11 @@ class Home extends Component {
       <div id="bed" class="object">침대</div>
       <div id="cabinet" class="object">보관함</div>
       <div id="tv" class="object">TV</div>
-      <div id="monitor" class="object">모니터</div>
+      <div id="monitor" class="object">${
+        getCookie("isLoggedIn")
+          ? `${getCookie("loggedInUser").profileName}님 환영합니다.`
+          : "로그인 해주세요"
+      }</div>
       <div id="desk" class="object">책상</div>
       <div id="coffee" class="object">커피</div>
       <div id="chair" class="object">의자</div>
@@ -36,14 +41,18 @@ class Home extends Component {
       if (e.target.id === "monitor") {
         window.history.pushState(null, "", "/login");
         $("#modal").classList.remove("hidden");
-        new Modal($("#modal"));
+        new Modal($("#modal"), {
+          renderHome: this.render.bind(this),
+        });
       }
       if (e.target.id === "bed") {
         new Bed();
       }
       if (e.target.closest("#phone-icon")) {
         $("#phone").classList.toggle("visible");
-        new Phone($("#phone"));
+        new Phone($("#phone"), {
+          $main: this.$target,
+        });
       }
     });
     window.addEventListener("DOMContentLoaded", (event) => {
