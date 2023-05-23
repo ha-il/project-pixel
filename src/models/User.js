@@ -5,6 +5,14 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   profileName: { type: String, required: true },
   password: { type: String, required: true },
+  playlists: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Playlist",
+      default: [],
+    },
+  ],
   createdAt: { type: Date, required: true, default: Date.now },
 });
 
