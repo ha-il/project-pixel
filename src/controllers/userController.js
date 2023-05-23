@@ -1,3 +1,4 @@
+import Playlist from "../models/Playlist.js";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 
@@ -43,10 +44,17 @@ export const login = async (req, res) => {
     });
   }
 
+  const loggedInUser = {
+    _id: user._id,
+    username: user.username,
+    profileName: user.profileName,
+  };
+
   req.session.isLoggedIn = true;
-  req.session.loggedInUser = user;
+  req.session.loggedInUser = loggedInUser;
 
   res.cookie("isLoggedIn", true);
+  res.cookie("loggedInUser", loggedInUser);
 
   return res.sendStatus(200);
 };
@@ -54,6 +62,7 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
   req.session.destroy();
   res.clearCookie("isLoggedIn");
+  res.clearCookie("loggedInUser");
 
   return res.sendStatus(200);
 };
