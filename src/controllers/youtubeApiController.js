@@ -1,10 +1,10 @@
 export const getMusicInfoFromYoutube = async (req, res) => {
-  const { music_id } = req.params;
+  const { musicId } = req.params;
 
   const BASE_URL = "https://www.googleapis.com/youtube/v3/videos";
   const part = `part=${["id", "snippet", "contentDetails"].join()}&`;
   const query = {
-    id: music_id,
+    id: musicId,
     key: process.env.YOUTUBE_DATA_API_KEY,
   };
   const params = new URLSearchParams(query).toString();

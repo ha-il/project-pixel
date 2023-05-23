@@ -1,5 +1,10 @@
 import express from "express";
-import { createAccount, login, logout } from "../controllers/userController.js";
+import {
+  createAccount,
+  getUserPlaylists,
+  login,
+  logout,
+} from "../controllers/userController.js";
 import { getMusicInfoFromYoutube } from "../controllers/youtubeApiController.js";
 import {
   getChartMusics,
@@ -16,8 +21,9 @@ const apiRouter = express.Router();
 apiRouter.post("/users/signup", createAccount);
 apiRouter.post("/users/login", login);
 apiRouter.post("/users/logout", logout);
+apiRouter.get("/users/playlists/:userId", getUserPlaylists);
 
-apiRouter.get("/youtube/musics/:music_id", getMusicInfoFromYoutube);
+apiRouter.get("/youtube/musics/:musicId", getMusicInfoFromYoutube);
 
 apiRouter.post("/musics", registerMusic);
 apiRouter.get("/musics/chart", getChartMusics);
