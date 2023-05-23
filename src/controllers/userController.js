@@ -66,3 +66,19 @@ export const logout = (req, res) => {
 
   return res.sendStatus(200);
 };
+export const getUserPlaylists = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const playlists = await Playlist.find({ owner: userId });
+
+    if (!playlists) {
+      return res.sendStatus(404);
+    }
+    const playlistIdList = playlists.map((playlist) => playlist._id);
+    return res.status(200).send(playlistIdList);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
+};
