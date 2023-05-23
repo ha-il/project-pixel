@@ -1,13 +1,25 @@
 import Component from "../../core/Component.js";
+import { getCookie } from "../../utils/cookie.js";
 import Playlist from "../Playlist.js";
 
 class Cabinet extends Component {
+  async fetchData() {
+    const userId = getCookie("loggedInUser")._id;
+    const response = await fetch(`/api/users/playlists/${userId}`);
+
+    if (response.ok) {
+      const playlists = await response.json();
+      return this.setState({ playlists });
+    }
+  }
   template() {
-    const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    const arr = this.state.playlists
+      ? [1, 2, 3, ...this.state.playlists]
+      : [1, 2, 3];
     return `
       ${arr
-        .map((item) => {
-          return `<a class="playlist">${item}</a>`;
+        .map((item, i) => {
+          return `<a class="playlist">${i}</a>`;
         })
         .join("")}
     `;
