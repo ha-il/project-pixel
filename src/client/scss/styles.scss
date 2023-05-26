@@ -1,34 +1,56 @@
 @import "./_variables.scss";
 @import "./reset.scss";
+@import url("//cdn.jsdelivr.net/gh/neodgm/neodgm-pro-webfont@1.020/neodgm_pro/style.css");
+.font-neodgm-pro {
+  font-family: "NeoDunggeunmo Pro";
+}
 body {
-  background-color: $bg-color;
   color: $font-color;
   height: 100vh;
+  background-color: $bg-color-room;
+  font-family: "NeoDunggeunmo Pro";
+}
+
+.room-dark {
+  background-color: $bg-color-room-dark;
 }
 
 main {
-  background-color: lightsteelblue;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.floor {
+  position: absolute;
+  height: calc(100vh - 656px);
+  width: 100vw;
+  bottom: -16px;
+  background-color: $bg-color-floor;
+}
+.floor-dark {
+  background-color: $bg-color-floor-dark;
 }
 
 .home-container {
   position: relative;
   width: 1280px;
-  height: 832px;
-  margin-bottom: calc(100vh - 832px);
-  border: 1px solid black;
+  height: 100vh;
+
+  //border: 1px solid black;
+
   .object {
     position: absolute;
   }
   #phone {
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.4s ease-out;
     top: 16px;
     left: 64px;
     width: 256px;
     height: 512px;
-    transform: translateX(-50vw);
+    transform: translateX(-100vw);
     background-color: white;
     color: black;
     padding: 56px 16px 16px 16px;
@@ -62,11 +84,13 @@ main {
           height: 48px;
           margin: 8px;
           background-color: burlywood;
+          cursor: pointer;
         }
       }
       .back-button {
         position: absolute;
         right: 0;
+        cursor: pointer;
       }
       .phone-form-container {
         height: 100%;
@@ -100,9 +124,10 @@ main {
     left: 16px;
     top: 16px;
     font-size: 2.5rem;
+    cursor: pointer;
   }
   #phone-icon:hover {
-    color: tomato;
+    color: $font-color-error-modal;
   }
   #window {
     width: 352px;
@@ -115,78 +140,152 @@ main {
     height: 208px;
     left: 96px;
     top: 448px;
+    cursor: pointer;
   }
   #cabinet {
     width: 256px;
     height: 512px;
     left: 512px;
     top: 128px;
-    display: grid;
-    grid-template-columns: repeat(3, 80px);
-    grid-template-rows: repeat(6, 96px);
-    justify-content: center;
-    padding: 8px;
-    gap: 8px;
-    .playlist {
-      border: 1px solid black;
+    background-color: $bg-color-cabinet;
+    border: 8px solid $border-color-cabinet;
+    display: flex;
+    flex-direction: column;
+    .cabinet-container {
+      display: flex;
+
+      width: 256px;
+      height: 96px;
+      border-bottom: 8px solid $border-color-cabinet;
+
+      .playlist {
+        width: 80px;
+        height: 96px;
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+        img {
+          pointer-events: none;
+        }
+      }
+      .playlist:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
     }
   }
   #tv {
     width: 288px;
     height: 176px;
     left: 816px;
-    top: 32px;
+    top: 64px;
+    cursor: pointer;
   }
   #monitor {
     width: 288px;
     height: 176px;
     left: 816px;
-    top: 224px;
+    top: 256px;
+    cursor: pointer;
   }
   #desk {
     width: 384px;
     height: 208px;
     left: 784px;
-    top: 448px;
+    top: 464px;
   }
   #coffee {
     width: 64px;
     height: 96px;
     left: 1104px;
-    top: 352px;
+    top: 368px;
   }
   #chair {
-    width: 160px;
-    height: 288px;
+    width: 224px;
+    height: 368px;
     left: 848px;
-    top: 368px;
-    background-color: deepskyblue;
+    top: 288px;
   }
   #modal {
     width: 832px;
     height: 512px;
-    background-color: white;
+    background-color: $bg-color-modal;
+    padding-bottom: 8px;
     top: 60px;
     left: 256px;
-    color: black;
+    color: white;
     position: relative;
+    border: 8px $border-color-modal-outer solid;
+
     .close-button {
       position: absolute;
-      right: 0;
+      right: 16px;
+      top: 16px;
+      background-color: $border-color-modal-outer;
+      border: $border-color-modal-outer outset 3px;
+      color: white;
+      cursor: pointer;
+    }
+    .close-button:hover {
+      background-color: white;
+      color: $border-color-modal-outer;
     }
     .modal-content {
       height: 100%;
+
       .form-container {
+        border: $border-color-modal-inner 4px solid;
         height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        .error_message {
+          margin-bottom: 0.5rem;
+          color: $font-color-error-modal;
+        }
         form {
+          font-size: $font-size-150;
+          display: flex;
+          flex-direction: column;
           .form-input {
             display: flex;
             flex-direction: column;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            input {
+              margin: 0.5rem 0;
+            }
+            span {
+              font-size: $font-size-100;
+              color: $font-color-gray-100;
+            }
+          }
+          input[type="submit"] {
+            background-color: inherit;
+            border: white outset 3px;
+            font-size: $font-size-150;
+            background-color: white;
+            font-family: "NeoDunggeunmo Pro";
+            color: $bg-color-modal;
+
+            align-self: center;
+            padding: 0.5rem;
+            cursor: pointer;
+          }
+          input[type="submit"]:hover {
+            color: white;
+            background-color: $bg-color-modal;
+          }
+        }
+
+        .link-container {
+          margin-top: 1rem;
+          a {
+            color: white;
           }
         }
       }
@@ -202,7 +301,7 @@ main {
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   padding: 0 10rem;
   .back-button {
     position: absolute;
@@ -210,14 +309,18 @@ main {
   }
   .info-container {
     width: 100%;
-    background-color: tomato;
     display: flex;
     margin: 2rem 0;
     padding: 2rem;
     .image {
       width: 208px;
       height: 208px;
-      background-color: aquamarine;
+      background-color: white;
+      color: $bg-color-room;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: $font-size-300;
     }
     .image-container {
       display: grid;
@@ -225,7 +328,7 @@ main {
       grid-template-rows: repeat(2, 104px);
       width: 208px;
       height: 208px;
-      background-color: yellow;
+
       img {
         width: 104px;
         height: 104px;
@@ -256,15 +359,14 @@ main {
   }
   .music-list-container {
     width: 100%;
-    background-color: lightseagreen;
     padding: 0rem 2rem;
     position: relative;
 
     .music-container {
-      background-color: royalblue;
       display: flex;
       align-items: center;
       padding: 1rem;
+      border-bottom: 1px solid white;
       .image {
         width: 48px;
         height: 48px;
@@ -272,7 +374,7 @@ main {
         margin-right: 1rem;
       }
       .title {
-        width: 60%;
+        width: 50%;
       }
       .artist {
         width: 20%;
@@ -283,9 +385,29 @@ main {
       }
     }
   }
-
   .music-list-container:last-child {
-    margin-bottom: 128px;
+    padding-bottom: 128px;
+  }
+  .recommended-music-list {
+    .rank {
+      margin-right: 1rem;
+    }
+  }
+  .search-container {
+    width: 100%;
+
+    padding: 2rem;
+    #music-search-form {
+      width: 100%;
+      display: flex;
+
+      #searchWord {
+        width: 300px;
+      }
+    }
+  }
+  .music-list-title {
+    padding: 2rem 2rem 0 2rem;
   }
 }
 
@@ -341,31 +463,69 @@ main {
 
 #music-controls {
   position: fixed;
-  opacity: 0.5;
   background-color: gray;
+  border-radius: 16px;
   bottom: 1rem;
-  width: calc(100% - 32px);
+  width: calc(100% - 64px);
   height: 96px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 1rem;
   margin: 0 1rem;
-  .player-contorls {
+  .music-info {
     display: flex;
     align-items: center;
-    justify-content: center;
-    .player-btn {
-      font-size: 2rem;
-      background-color: white;
-      color: $bg-color;
-      padding: 1rem;
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
+    width: 240px;
+
+    .image {
+      width: 64px;
+      height: 64px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 1rem;
+    }
+    .info-container {
+      width: 176px;
+      height: 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      overflow: hidden;
+
+      .title {
+        font-size: 16px;
+      }
+      .artist {
+        font-size: 8px;
+      }
+    }
+  }
+  .play-contorls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 64px;
+    background-color: cadetblue;
+    align-items: center;
+    width: 30%;
+    .player-bar {
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin: 0 1rem;
+      width: 100%;
+      #timeline {
+        width: 100%;
+        margin-bottom: 6px;
+      }
+      span {
+        margin: 0px 6px;
+      }
     }
+  }
+  .volume-controls {
+    display: flex;
+    align-items: center;
   }
 }
