@@ -20,6 +20,11 @@ export function convertMillisecondsToTime(milliseconds) {
   const formattedMinutes = minutes.toString().padStart(2, "0");
   const formattedSeconds = seconds.toString().padStart(2, "0");
 
+  if (formattedHours === "00") {
+    const timeString = `${formattedMinutes}:${formattedSeconds}`;
+    return timeString;
+  }
+
   const timeString = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 
   return timeString;
