@@ -50,31 +50,6 @@ class App extends Component {
       playerSetState: musicPlayer.setState.bind(musicPlayer),
     });
   }
-
-  setEvent() {
-    const musicPlayer = new MusicPlayer($("#music-player"), {
-      musics: [
-        {
-          title: "스마트폰 아이콘을 클릭해보세요!",
-          youtubeId: "",
-          imageUrl: "../../../images/coffee.png",
-          artist: "음악 추가와 플레이리스트 생성을 할 수 있습니다.",
-        },
-      ],
-    });
-    const links = document.querySelectorAll("a[href]");
-    links.forEach((link) => {
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
-        const path = link.pathname;
-        window.history.pushState(null, "", path);
-        const pageComponent = this.router[path];
-        new pageComponent($("main"), {
-          playerSetState: musicPlayer.setState.bind(musicPlayer),
-        });
-      });
-    });
-  }
 }
 
 new App($("#app"));
