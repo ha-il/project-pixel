@@ -4,16 +4,9 @@ import "./models/User.js";
 import "./models/Music.js";
 import "./models/Playlist.js";
 import app from "./server.js";
-import https from "https";
-import fs from "fs";
 
 const port = 3000;
 
-const options = {
-  key: fs.readFileSync("localhost-key.pem"),
-  cert: fs.readFileSync("localhost.pem"),
-};
-
-https.createServer(options, app).listen(port, () => {
-  console.log(`✅ Server listening on port https://localhost:${port}`);
+app.listen(port, () => {
+  console.log(`✅ Server listening on port http://localhost:${port}`);
 });
