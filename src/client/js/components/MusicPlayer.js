@@ -1,11 +1,13 @@
 import Component from "../core/Component.js";
-import { $ } from "../utils/dom.js";
+import { $, toggleClass } from "../utils/dom.js";
 import { convertMillisecondsToTime } from "../utils/time.js";
 
 class MusicPlayer extends Component {
   player;
   done = false;
   intervalId = 123;
+  volume = 1;
+
   init() {
     this.initYoutubeApi();
     this.state = this.initState();
@@ -76,7 +78,7 @@ class MusicPlayer extends Component {
               <i class="fa-solid fa-backward-step"></i>
             </button>
             <button id="play-btn" class="player-btn" type="button">
-              <i class="fa-solid fa-play"></i>
+              <i id="play-icon" class="fa-solid fa-play"></i>
             </button>
             <button id="next-btn" class="player-btn" type="button">
               <i class="fa-solid fa-forward-step"></i>
@@ -90,7 +92,7 @@ class MusicPlayer extends Component {
         </div>
         <div class=volume-controls>
           <button id="mute" type="button">
-            <i class="fa-solid fa-volume-high"></i>
+            <i id="mute-icon" class="fa-solid fa-volume-high"></i>
           </button>
           <input id="volume" type="range" step="0.01" value="0.5" min="0" max="1" />
         </div>
@@ -102,7 +104,6 @@ class MusicPlayer extends Component {
       height: "360",
       width: "640",
       videoId: this.state.currentMusic.youtubeId,
-
       events: {
         onReady: this.onPlayerReady.bind(this),
         onStateChange: this.onPlayerStateChange.bind(this),
@@ -145,13 +146,12 @@ class MusicPlayer extends Component {
     const currentIndex = this.state.musics.findIndex(
       (music) => music.youtubeId === this.state.currentMusic.youtubeId
     );
-    console.log(currentIndex);
+
     if (currentIndex === this.state.musics.length - 1) {
       return;
     }
     this.setState({
       currentMusic: this.state.musics[currentIndex + 1],
-      visible: true,
     });
   }
 
@@ -188,19 +188,12 @@ class MusicPlayer extends Component {
 
     $("#play-btn").addEventListener("click", (e) => {
       let playerState = this.player.getPlayerState();
-      if (playerState === -1) {
-        return this.player.playVideo();
-      }
-      if (playerState === 0) {
-        return this.player.playVideo();
-      }
+
       if (playerState === 1) {
+        toggleClass($("#play-icon"), "fa-play", "fa-pause");
         return this.player.pauseVideo();
-      }
-      if (playerState === 2) {
-        return this.player.playVideo();
-      }
-      if (playerState === 5) {
+      } else {
+        toggleClass($("#play-icon"), "fa-pause", "fa-play");
         return this.player.playVideo();
       }
     });
@@ -222,13 +215,19 @@ class MusicPlayer extends Component {
     $("#mute").addEventListener("click", (e) => {
       let isMuted = this.player.isMuted();
       if (isMuted) {
+        toggleClass($("#mute-icon"), "fa-volume-xmark", "fa-volume-high");
+        $("#volume").value = this.volume;
         this.player.unMute();
       } else {
+        toggleClass($("#mute-icon"), "fa-volume-high", "fa-volume-xmark");
+        $("#volume").value = 0;
         this.player.mute();
       }
+      return;
     });
     $("#volume").addEventListener("input", (e) => {
       const { value } = e.target;
+      this.volume = value;
       this.player.setVolume(value * 100);
     });
     $("#timeline").addEventListener("input", (e) => {

@@ -4,3 +4,8 @@ export const $ = (selector, $target) => {
   }
   return document.querySelector(selector);
 };
+
+export const toggleClass = ($element, before, after) => {
+  $element.classList.remove(before);
+  $element.classList.add(after);
+};
