@@ -1,10 +1,12 @@
 import "../scss/styles.scss";
+import Chart from "./components/Chart.js";
 import Home from "./components/Home.js";
 import MusicPlayer from "./components/MusicPlayer.js";
-import Playlist from "./components/Playlist";
+import Playlist from "./components/Playlist.js";
 import Component from "./core/Component.js";
+import { getCookie } from "./utils/cookie";
 import { $ } from "./utils/dom.js";
-import { matchRoute } from "./utils/routerHelper";
+import { matchRoute } from "./utils/routerHelper.js";
 
 class App extends Component {
   initRouter() {
@@ -13,15 +15,12 @@ class App extends Component {
       "/login": Home,
       "/signup": Home,
       "/playlists/:id": Playlist,
+      "/playlists/chart": Chart,
     };
-    window.addEventListener("popstate", () => {
-      this.render();
-    });
-    window.dispatchEvent(new Event("popstate"));
   }
   template() {
     return `
-      <main></main>
+      <main class=${getCookie("isLoggedIn") ? "" : "room-dark"}></main>
       <div id="music-player"></div>
     `;
   }
@@ -29,14 +28,20 @@ class App extends Component {
     let path = window.location.pathname;
     const isPlaylists = path.includes("playlists/");
 
-    if (isPlaylists) {
+    if (isPlaylists && !(path === "/playlists/chart")) {
       path = matchRoute(this.router, path);
     }
 
     const pageComponent = this.router[path];
-    new pageComponent($("main"));
 
-    new MusicPlayer($("#music-player"));
+    const musicPlayer = new MusicPlayer($("#music-player"), {
+      musics: [{ title: "", youtubeId: "", imageUrl: "", artist: "" }],
+    });
+
+    musicPlayer;
+    new pageComponent($("main"), {
+      playerSetState: musicPlayer.setState.bind(musicPlayer),
+    });
   }
 
   setEvent() {
