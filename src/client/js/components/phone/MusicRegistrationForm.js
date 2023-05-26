@@ -69,7 +69,8 @@ class MusicRegistrationForm extends Component {
         body: musicData,
       });
       if (response.ok) {
-        new UrlRegistration($(".phone-container"));
+        const { $main } = this.props;
+        new UrlRegistration($(".phone-container"), { $main });
       } else {
         const data = await response.json();
         $("#music-registration-error").innerText = `${data.errorMessage}`;
