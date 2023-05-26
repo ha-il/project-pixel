@@ -34,21 +34,23 @@ class App extends Component {
 
     const pageComponent = this.router[path];
 
-    const musicPlayer = new MusicPlayer($("#music-player"), {
-      musics: [
-        {
-          title: "스마트폰 아이콘을 클릭해보세요!",
-          youtubeId: "",
-          imageUrl: "../../../images/coffee.png",
-          artist: "음악 추가와 플레이리스트 생성을 할 수 있습니다.",
-        },
-      ],
-    });
-
-    musicPlayer;
-    new pageComponent($("main"), {
-      playerSetState: musicPlayer.setState.bind(musicPlayer),
-    });
+    if (getCookie("isLoggedIn")) {
+      const musicPlayer = new MusicPlayer($("#music-player"), {
+        musics: [
+          {
+            title: "스마트폰 아이콘을 클릭해보세요!",
+            youtubeId: "",
+            imageUrl: "../../../images/coffee.png",
+            artist: "음악 추가와 플레이리스트 생성을 할 수 있습니다.",
+          },
+        ],
+      });
+      new pageComponent($("main"), {
+        playerSetState: musicPlayer.setState.bind(musicPlayer),
+      });
+    } else {
+      new pageComponent($("main"));
+    }
   }
 }
 
