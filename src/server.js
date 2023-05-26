@@ -16,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/static", express.static("assets"));
+app.use("/images", express.static("images"));
 
 app.use(
   session({
