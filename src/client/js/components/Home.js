@@ -2,7 +2,7 @@ import Component from "../core/Component.js";
 import { $ } from "../utils/dom.js";
 import Modal from "./Modal.js";
 import Cabinet from "./furnitures/Cabinet.js";
-import Bed from "./furnitures/bed.js";
+import Bed from "./furnitures/Bed.js";
 import Phone from "./Phone.js";
 import { getCookie } from "../utils/cookie.js";
 
