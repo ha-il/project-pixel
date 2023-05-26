@@ -12,8 +12,7 @@ class Modal extends Component {
   }
   addComponent() {
     if (window.location.pathname === "/login") {
-      const { renderHome } = this.props;
-      new Login($(".modal-content"), { renderHome });
+      new Login($(".modal-content"));
     }
     if (window.location.pathname === "/signup") {
       new Signup($(".modal-content"));
