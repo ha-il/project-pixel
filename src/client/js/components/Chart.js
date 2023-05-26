@@ -56,13 +56,6 @@ class Chart extends Component {
     `;
   }
 
-  findMusicByMusicid(musicid) {
-    for (let music of this.state.playlist.musics) {
-      if (music._id === musicid) {
-        return true;
-      }
-    }
-  }
   setEvent() {
     $(".back-button").addEventListener("click", (e) => {
       window.history.pushState(null, "", "/");
@@ -94,8 +87,11 @@ class Chart extends Component {
       }
     });
     $(".play-button").addEventListener("click", (e) => {
-      new MusicPlayer($("#music-player"), {
-        musics: this.state.playlist.musics,
+      if (this.state.chartMusics.length === 0) return;
+      const { playerSetState } = this.props;
+      playerSetState({
+        musics: this.state.chartMusics,
+        currentMusic: this.state.chartMusics[0],
       });
     });
   }
