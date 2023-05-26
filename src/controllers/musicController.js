@@ -42,3 +42,27 @@ export const getChartMusics = async (req, res) => {
     });
   }
 };
+
+export const updatePlaycount = async (req, res) => {
+  const { musicId } = req.params;
+  const music = await Music.findById(musicId);
+  if (!music) {
+    return res.status(404);
+  }
+  music.playcount = music.playcount + 1;
+  await music.save();
+  return res.status(200);
+};
+
+export const searchMusic = async (req, res) => {
+  const { searchWord } = req.params;
+  let musics = [];
+  if (searchWord) {
+    musics = await Music.find({
+      title: {
+        $regex: new RegExp(`${searchWord}$`, "i"),
+      },
+    });
+  }
+  return res.status(200).send(musics);
+};
