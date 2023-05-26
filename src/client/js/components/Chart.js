@@ -66,7 +66,8 @@ class Chart extends Component {
   setEvent() {
     $(".back-button").addEventListener("click", (e) => {
       window.history.pushState(null, "", "/");
-      new Home($("main"));
+      const { playerSetState } = this.props;
+      new Home($("main"), { playerSetState });
     });
     $(".recommended-music-list").addEventListener("click", async (e) => {
       if (e.target.classList.contains("add-music-button")) {

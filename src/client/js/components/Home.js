@@ -94,9 +94,10 @@ class Home extends Component {
       if (e.target.id === "tv") {
         e.preventDefault();
         window.history.pushState(null, "", `/playlists/chart`);
-
+        const { playerSetState } = this.props;
         new Chart(this.$target, {
           $main: this.$target,
+          playerSetState,
         });
       }
     });
