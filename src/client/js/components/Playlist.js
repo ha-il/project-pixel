@@ -159,6 +159,7 @@ class Playlist extends Component {
       }
     });
     $(".play-button").addEventListener("click", (e) => {
+      if (this.state.playlist.musics.length === 0) return;
       const { playerSetState } = this.props;
       return playerSetState({
         musics: this.state.playlist.musics,

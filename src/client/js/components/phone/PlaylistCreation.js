@@ -61,9 +61,10 @@ class PlaylistCreation extends Component {
       const data = await response.json();
 
       if (response.ok) {
-        const { $main } = this.props;
         window.history.pushState(null, "", `/playlists/${data.playlistId}`);
-        new Playlist($main, { $main });
+
+        const { $main, playerSetState } = this.props;
+        new Playlist($main, { $main, playerSetState });
       } else {
         return ($(
           "#playlist-creation-error"

@@ -87,8 +87,10 @@ class Home extends Component {
       }
       if (e.target.closest("#phone-icon")) {
         $("#phone").classList.toggle("visible");
+        const { playerSetState } = this.props;
         new Phone($("#phone"), {
           $main: this.$target,
+          playerSetState,
         });
       }
       if (e.target.id === "tv") {

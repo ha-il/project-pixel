@@ -40,8 +40,8 @@ class PhoneHome extends Component {
   }
   setEvent() {
     $("#playlist-creation").addEventListener("click", (e) => {
-      const { $main } = this.props;
-      new PlaylistCreation($(".phone-container"), { $main });
+      const { $main, playerSetState } = this.props;
+      new PlaylistCreation($(".phone-container"), { $main, playerSetState });
     });
     $("#music-registration").addEventListener("click", (e) => {
       const { $main } = this.props;
