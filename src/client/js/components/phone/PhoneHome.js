@@ -1,4 +1,5 @@
 import Component from "../../core/Component.js";
+import { getCookie } from "../../utils/cookie.js";
 import { $ } from "../../utils/dom.js";
 import PlaylistCreation from "./PlaylistCreation.js";
 import UrlRegistration from "./UrlRegistration.js";
@@ -6,33 +7,45 @@ import UrlRegistration from "./UrlRegistration.js";
 class PhoneHome extends Component {
   template() {
     return `
-      <div class="widget-container">
-        <div id="user-avatar" class="widget">이미지</div>
-        <div id="user-profile" class="widget">
-          <span class="profile-name">프로필 이름</span>
+      <div class="header">
+        <div class="telecom">SKT</div>
+        <div class="empty-space">
+          <div class="speaker"></div>
+        </div>
+        <div class="status-container">
+          <div class=""><i class="fa-solid fa-signal"></i></div>
+          <div class="status-center">5G</div>
+          <div class=""><i class="fa-solid fa-battery-full"></i></div>
         </div>
       </div>
+      <div class="time-container">
+        <div class="date">5월 27일 토요일</div>
+        <div class="time">12:53</div>
+        <div class="greeting">Hello, ${
+          getCookie("loggedInUser").profileName
+        } !</div>
+      </div>
+      
       <div class="dock">
-        <div id="playlist-creation" class="phone-app">플리 생성</div>
-        <div id="music-registration" class="phone-app">음악 등록</div>
-        <div class="phone-app">3</div>
-        <div class="phone-app">4</div>
+        <div id="playlist-creation" class="phone-app">
+          <i class="fa-solid fa-list"></i>
+        </div>
+        <div id="music-registration" class="phone-app">
+          <i class="fa-solid fa-music"></i>
+        </div>
+        <div class="phone-app">X</div>
+        <div class="phone-app">X</div>
       </div>
     `;
   }
   setEvent() {
-    this.$target.addEventListener("click", (e) => {
-      if (e.target.id === "user-avatar") {
-      }
-      if (e.target.id === "user-profile") {
-      }
-      if (e.target.id === "playlist-creation") {
-        const { $main } = this.props;
-        new PlaylistCreation($(".phone-container"), { $main });
-      }
-      if (e.target.id === "music-registration") {
-        new UrlRegistration($(".phone-container"));
-      }
+    $("#playlist-creation").addEventListener("click", (e) => {
+      const { $main } = this.props;
+      new PlaylistCreation($(".phone-container"), { $main });
+    });
+    $("#music-registration").addEventListener("click", (e) => {
+      const { $main } = this.props;
+      new UrlRegistration($(".phone-container"), { $main });
     });
   }
 }
