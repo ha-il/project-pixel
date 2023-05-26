@@ -28,7 +28,7 @@ export const registerMusic = async (req, res) => {
 
 export const getChartMusics = async (req, res) => {
   try {
-    const chartMusics = await Music.find({}).sort({ likeCount: -1 }).limit(10);
+    const chartMusics = await Music.find({}).sort({ playcount: -1 }).limit(10);
     if (!chartMusics) {
       return res.status(404).send({
         errorMessage:
