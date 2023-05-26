@@ -65,6 +65,4 @@ class App extends Component {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  new App($("#app"));
-});
+new App($("#app"));
