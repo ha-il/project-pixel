@@ -88,7 +88,7 @@ class Playlist extends Component {
                 required
               />
             </div>
-            <input type="submit" , value="검색" />
+            <input type="submit" value="검색" />
           </form>
         </div>
         <div class="music-list-title">${
@@ -160,7 +160,6 @@ class Playlist extends Component {
     });
     $(".play-button").addEventListener("click", (e) => {
       if (this.state.playlist.musics.length === 0) return;
-
       const { playerSetState } = this.props;
       playerSetState({
         musics: this.state.playlist.musics,
