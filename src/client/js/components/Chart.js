@@ -87,9 +87,8 @@ class Chart extends Component {
       }
     });
     $(".play-button").addEventListener("click", (e) => {
-      if (this.state.chartMusics.length === 0) return;
       const { playerSetState } = this.props;
-      playerSetState({
+      return playerSetState({
         musics: this.state.chartMusics,
         currentMusic: this.state.chartMusics[0],
       });
