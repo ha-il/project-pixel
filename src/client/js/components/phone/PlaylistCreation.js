@@ -15,7 +15,7 @@ class PlaylistCreation extends Component {
               id="name"
               name="name"
               type="text"
-              placeholder="플레이리스트 이름을 입력해주세요"
+              placeholder="생성할 플레이리스트의 이름을 입력해주세요"
               maxlength="30"
               required
             />
@@ -26,7 +26,7 @@ class PlaylistCreation extends Component {
               id="description"
               name="description"
               type="text"
-              placeholder="플레이리스트 설명을 입력해주세요"
+              placeholder="생성할 플레이리스트의 설명을 입력해주세요"
               maxlength="50"
               required
             />
@@ -39,7 +39,8 @@ class PlaylistCreation extends Component {
   }
   setEvent() {
     $(".back-button").addEventListener("click", () => {
-      new PhoneHome(this.$target);
+      const { $main } = this.props;
+      new PhoneHome($(".phone-container"), { $main });
     });
     $("#playlist-creation-form").addEventListener("submit", async (e) => {
       e.preventDefault();

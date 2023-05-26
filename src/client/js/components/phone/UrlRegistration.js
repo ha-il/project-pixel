@@ -29,7 +29,8 @@ class UrlRegistration extends Component {
   }
   setEvent() {
     $(".back-button").addEventListener("click", () => {
-      new PhoneHome(this.$target);
+      const { $main } = this.props;
+      new PhoneHome($(".phone-container"), { $main });
     });
     $("#url-registration-form").addEventListener("submit", async (e) => {
       e.preventDefault();
