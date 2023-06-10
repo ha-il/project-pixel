@@ -1,6 +1,7 @@
 import Component from "../../core/Component.js";
 import { getCookie } from "../../utils/cookie.js";
 import { $ } from "../../utils/dom.js";
+import { getCurrentDate, getCurrentTime } from "../../utils/time.js";
 import PlaylistCreation from "./PlaylistCreation.js";
 import UrlRegistration from "./UrlRegistration.js";
 
@@ -19,8 +20,8 @@ class PhoneHome extends Component {
         </div>
       </div>
       <div class="time-container">
-        <div class="date">5월 27일 토요일</div>
-        <div class="time">12:53</div>
+        <div class="date">${getCurrentDate()}</div>
+        <div class="time">${getCurrentTime()}</div>
         <div class="greeting">Hello, ${
           getCookie("loggedInUser").profileName
         } !</div>

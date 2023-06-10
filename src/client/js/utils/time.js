@@ -29,3 +29,21 @@ export function convertMillisecondsToTime(milliseconds) {
 
   return timeString;
 }
+
+export function getCurrentDate() {
+  const date = new Date();
+  const month = date.getMonth() + 1;
+  const day = date.getDay();
+  const days = ["일", "월", "화", "수", "목", "금", "토", "일"];
+  const today = date.getDate();
+
+  return `${month}월 ${today}일 ${days[day]}요일`;
+}
+
+export function getCurrentTime() {
+  const date = new Date();
+  const hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+
+  return `${hours}:${minutes}`;
+}
