@@ -2,6 +2,7 @@ import Music from "../models/Music.js";
 
 export const registerMusic = async (req, res) => {
   const { youtubeId, title, artist, imageUrl, duration } = req.body;
+  const trimTitle = title.trim();
   const isMusicExists = await Music.exists({ youtubeId });
   if (isMusicExists) {
     return res.status(400).send({
@@ -11,7 +12,7 @@ export const registerMusic = async (req, res) => {
   try {
     await Music.create({
       youtubeId,
-      title,
+      title: trimTitle,
       artist,
       imageUrl,
       duration,
@@ -56,11 +57,16 @@ export const updatePlaycount = async (req, res) => {
 
 export const searchMusic = async (req, res) => {
   const { searchWord } = req.params;
+
   let musics = [];
   if (searchWord) {
+    const escapedSearchWord = searchWord.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     musics = await Music.find({
       title: {
-        $regex: new RegExp(`${searchWord}$`, "i"),
+        $regex: new RegExp(
+          `(?<![A-Za-z0-9_가-힣])${escapedSearchWord}(?![A-Za-z0-9_가-힣])`,
+          "i"
+        ),
       },
     });
   }
