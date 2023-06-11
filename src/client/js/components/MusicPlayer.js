@@ -72,7 +72,7 @@ class MusicPlayer extends Component {
             <span class="artist">${this.state.currentMusic.artist}</span>
           </div>
         </div>
-        <div class="play-contorls">
+        <div id="play-contorls">
           <div class="play-buttons">
             <button id="pre-btn" class="player-btn" type="button">
               <i class="fa-solid fa-backward-step"></i>
@@ -94,7 +94,7 @@ class MusicPlayer extends Component {
           <button id="mute" type="button">
             <i id="mute-icon" class="fa-solid fa-volume-high"></i>
           </button>
-          <input id="volume" type="range" step="0.01" value="0.5" min="0" max="1" />
+          <input id="volume" type="range" step="0.01" value="0" min="0" max="1" />
         </div>
       </div>
     `;
@@ -114,7 +114,10 @@ class MusicPlayer extends Component {
   onPlayerReady(event) {
     clearInterval(this.intervalId);
 
+    toggleClass($("#play-icon"), "fa-play", "fa-pause");
     $("#volume").value = event.target.getVolume();
+    $("#volume").style.backgroundSize =
+      Math.floor(($("#volume").value * 100) / $("#volume").max) + "% 100%";
     $("#total-time").textContent = convertMillisecondsToTime(
       event.target.getDuration() * 1000
     );
@@ -130,6 +133,10 @@ class MusicPlayer extends Component {
         event.target.getCurrentTime() * 1000
       );
       $("#timeline").value = event.target.getCurrentTime();
+
+      $("#timeline").style.backgroundSize =
+        Math.floor(($("#timeline").value * 100) / $("#timeline").max) +
+        "% 100%";
     }, 1000);
 
     event.target.playVideo();
@@ -176,12 +183,11 @@ class MusicPlayer extends Component {
       if (e.target.closest(".music-container")) {
         const { id } = e.target.closest(".music-container");
         const music = this.findMusicByYoutubeId(id);
-
         this.setState({ currentMusic: music, visible: true });
       }
     });
     $("#music-controls").addEventListener("click", (e) => {
-      if (e.target.id === "music-controls") {
+      if (e.target.id === "music-controls" || e.target.id === "play-contorls") {
         $("#music-list").classList.toggle("visible");
       }
     });
@@ -190,10 +196,10 @@ class MusicPlayer extends Component {
       let playerState = this.player.getPlayerState();
 
       if (playerState === 1) {
-        toggleClass($("#play-icon"), "fa-play", "fa-pause");
+        toggleClass($("#play-icon"), "fa-pause", "fa-play");
         return this.player.pauseVideo();
       } else {
-        toggleClass($("#play-icon"), "fa-pause", "fa-play");
+        toggleClass($("#play-icon"), "fa-play", "fa-pause");
         return this.player.playVideo();
       }
     });
@@ -226,12 +232,18 @@ class MusicPlayer extends Component {
       return;
     });
     $("#volume").addEventListener("input", (e) => {
-      const { value } = e.target;
+      const { value, max } = e.target;
+      e.target.style.backgroundSize =
+        Math.floor((value * 100) / max) + "% 100%";
       this.volume = value;
       this.player.setVolume(value * 100);
     });
     $("#timeline").addEventListener("input", (e) => {
-      const { value } = e.target;
+      const { value, max } = e.target;
+
+      e.target.style.backgroundSize =
+        Math.floor((value * 100) / max) + "% 100%";
+
       this.player.seekTo(value);
     });
   }
