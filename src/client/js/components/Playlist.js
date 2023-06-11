@@ -37,18 +37,18 @@ class Playlist extends Component {
             <div class="name">${
               this.state.playlist
                 ? this.state.playlist.name
-                : "플레이리스트 제목"
+                : "플레이리스트를 불러오고 있습니다..."
             }</div>
             <div class="profileName">${
               this.state.playlist
                 ? this.state.playlist.owner.profileName
-                : "유저의 프로필 네임"
+                : "..."
             }</div>
             <div class="duration">${
               this.state.playlist ? this.state.playlist.musics.length : "0"
             }곡</div>
             <div class="description">${
-              this.state.playlist ? this.state.playlist.description : "곡 설명"
+              this.state.playlist ? this.state.playlist.description : "..."
             }</div>
             <button type="button" class="play-button">재생</button>
           </div>
