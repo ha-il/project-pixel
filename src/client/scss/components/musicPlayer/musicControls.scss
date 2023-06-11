@@ -8,12 +8,14 @@
   border-radius: 16px;
   bottom: 1rem;
   width: calc(100% - 64px);
+  min-width: 640px;
   height: 96px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
   margin: 0 1rem;
+  cursor: pointer;
   .music-info {
     display: flex;
     align-items: center;
@@ -22,7 +24,6 @@
     .image {
       width: 64px;
       height: 64px;
-
       display: flex;
       justify-content: center;
       align-items: center;
@@ -44,20 +45,19 @@
       }
     }
   }
-  .play-contorls {
+  #play-contorls {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     height: 64px;
-
     align-items: center;
     width: 30%;
+    min-width: 200px;
     .play-buttons {
       .player-btn {
         font-size: $font-size-200;
         margin: 0px 0.5rem;
-      }
-      #play-btn {
       }
     }
 
