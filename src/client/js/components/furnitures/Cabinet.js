@@ -3,15 +3,15 @@ import { getCookie } from "../../utils/cookie.js";
 import Playlist from "../Playlist.js";
 
 class Cabinet extends Component {
-  init() {
-    this.state = this.initState();
-    this.initRouter();
-    this.fetchData();
-    this.render();
+  initState() {
+    return {
+      isLoggedIn: getCookie("isLoggedIn"),
+      loggedInUser: getCookie("loggedInUser"),
+    };
   }
   async fetchData() {
-    if (!getCookie("isLoggedIn")) return;
-    const userId = getCookie("loggedInUser")._id;
+    if (!this.state.isLoggedIn) return;
+    const userId = this.state.loggedInUser._id;
     const response = await fetch(`/api/users/playlists/${userId}`);
 
     if (response.ok) {
@@ -20,58 +20,27 @@ class Cabinet extends Component {
     }
   }
   template() {
-    const arr = this.state.playlists ? [...this.state.playlists] : [];
+    const userPlaylists = this.state.playlists ? [...this.state.playlists] : [];
+    const cabinetContainer = (start, end) => {
+      return `
+        <div class="cabinet-container">
+          ${userPlaylists
+            .slice(start, end)
+            .map((item, i) => {
+              return `<a class="playlist" data-playlistid=${item}>
+                        <img src=../../../../../images/playlist-${i}.png />
+                      </a>`;
+            })
+            .join("")} 
+        </div>`;
+    };
     return `
-      <div class="cabinet-container">
-        ${arr
-          .slice(0, 3)
-          .map((item, i) => {
-            return `<a class="playlist" data-playlistid=${item}>
-                      <img src=../../../../../images/playlist-${i}.png />
-                    </a>`;
-          })
-          .join("")} 
-      </div>
-      <div class="cabinet-container">
-      ${arr
-        .slice(3, 6)
-        .map((item, i) => {
-          return `<a class="playlist" data-playlistid=${item}>
-                    <img src=../../../../../images/playlist-${i}.png />
-                  </a>`;
-        })
-        .join("")} 
-      </div>
-      <div class="cabinet-container">
-      ${arr
-        .slice(6, 9)
-        .map((item, i) => {
-          return `<a class="playlist" data-playlistid=${item}>
-                      <img src=../../../../../images/playlist-${i}.png />
-                    </a>`;
-        })
-        .join("")} 
-      </div>
-      <div class="cabinet-container">
-      ${arr
-        .slice(9, 12)
-        .map((item, i) => {
-          return `<a class="playlist" data-playlistid=${item}>
-                      <img src=../../../../../images/playlist-${i}.png />
-                    </a>`;
-        })
-        .join("")} 
-      </div>
-      <div class="cabinet-container">
-      ${arr
-        .slice(12, 15)
-        .map((item, i) => {
-          return `<a class="playlist" data-playlistid=${item}>
-                      <img src=../../../../../images/playlist-${i}.png />
-                    </a>`;
-        })
-        .join("")} 
-      </div>
+      ${cabinetContainer(0, 3)}
+      ${cabinetContainer(3, 6)}
+      ${cabinetContainer(6, 9)}
+      ${cabinetContainer(9, 12)}
+      ${cabinetContainer(12, 15)}
+      
     `;
   }
   setEvent() {
@@ -80,9 +49,7 @@ class Cabinet extends Component {
       if (e.target.classList.contains("playlist")) {
         const playlistId = e.target.dataset.playlistid;
         window.history.pushState(null, "", `/playlists/${playlistId}`);
-
         const { $main, playerSetState } = this.props;
-
         new Playlist($main, { $main, playerSetState });
       }
     });
