@@ -1,6 +1,7 @@
 import Component from "../../core/Component.js";
 import { $ } from "../../utils/dom.js";
 import Signup from "./Singup.js";
+import formInput from "./formInput.js";
 
 class Login extends Component {
   template() {
@@ -8,26 +9,20 @@ class Login extends Component {
       <div class="form-container">
         <div id="login-error" class="error_message"></div>
         <form method="post" id="login-form">
-          <div class="form-input">
-            <label for="username">사용자 이름</label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              placeholder="사용자 이름"
-              required
-            />
-          </div>
-          <div class="form-input">
-            <label for="password">비밀번호</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="비밀번호"
-              required
-            />
-          </div>
+          ${formInput({
+            id: "username",
+            labelText: "사용자 이름",
+            name: "username",
+            type: "text",
+            placeholder: "사용자 이름",
+          })}
+          ${formInput({
+            id: "password",
+            labelText: "비밀번호",
+            name: "password",
+            type: "password",
+            placeholder: "비밀번호",
+          })}
           <input type="submit" , value="로그인하기" />
         </form>
         <div class="link-container">

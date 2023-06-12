@@ -1,6 +1,7 @@
 import Component from "../../core/Component.js";
 import { $ } from "../../utils/dom.js";
 import Login from "./Login.js";
+import formInput from "./formInput.js";
 
 class Signup extends Component {
   template() {
@@ -8,24 +9,36 @@ class Signup extends Component {
       <div class="form-container">
         <div id="signup-error" class="error_message"></div>
         <form method="POST" id="signup-form">
-          <div class="form-input">
-            <label for="username">어떤 사용자 이름을 사용하시겠어요?</label>
-            <input id="username" name="username" type="text" placeholder="사용자 이름을 입력하세요" required>
-            <span>로그인에 사용되는 이름입니다.</span>
-          </div>
-          <div class="form-input">
-            <label for="profileName">어떤 프로필 이름을 사용하시겠어요?</label>
-            <input id="profileName" name="profileName" type="text" placeholder="프로필 이름을 입력하세요" required>
-            <span>프로필에 표시되는 이름입니다.</span>
-          </div>
-          <div class="form-input">
-            <label for="password">비밀번호를 만드세요.</label>
-            <input id="password" name="password" type="password" placeholder="비밀번호를 입력하세요" required>
-          </div>
-          <div class="form-input">
-            <label for="passwordConfirm">비밀번호를 확인하세요.</label>
-            <input id="passwordConfirm" name="passwordConfirm" type="password" placeholder="비밀번호를 다시 입력하세요" required>
-          </div>
+          ${formInput({
+            id: "username",
+            labelText: "어떤 사용자 이름을 사용하시겠어요?",
+            name: "username",
+            type: "text",
+            placeholder: "사용자 이름을 입력하세요",
+            infoSpan: "로그인에 사용되는 이름입니다.",
+          })}
+          ${formInput({
+            id: "profileName",
+            labelText: "어떤 프로필 이름을 사용하시겠어요?",
+            name: "profileName",
+            type: "text",
+            placeholder: "프로필 이름을 입력하세요",
+            infoSpan: "프로필에 표시되는 이름입니다.",
+          })}
+          ${formInput({
+            id: "password",
+            labelText: "비밀번호를 만드세요.",
+            name: "password",
+            type: "password",
+            placeholder: "비밀번호를 입력하세요",
+          })}
+          ${formInput({
+            id: "passwordConfirm",
+            labelText: "비밀번호를 확인하세요.",
+            name: "passwordConfirm",
+            type: "password",
+            placeholder: "비밀번호를 다시 입력하세요",
+          })}
           <input type="submit" value="가입하기">
         </form>
         <div class="link-container">
