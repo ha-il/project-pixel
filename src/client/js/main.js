@@ -18,24 +18,10 @@ class App extends Component {
       "/playlists/chart": Chart,
     };
   }
-  template() {
-    return `
-      <main class=${getCookie("isLoggedIn") ? "" : "room-dark"}></main>
-      <div id="music-player"></div>
-    `;
-  }
-  addComponent() {
-    let path = window.location.pathname;
-    const isPlaylists = path.includes("playlists/");
-
-    if (isPlaylists && !(path === "/playlists/chart")) {
-      path = matchRoute(this.router, path);
-    }
-
-    const pageComponent = this.router[path];
-
-    if (getCookie("isLoggedIn")) {
-      const musicPlayer = new MusicPlayer($("#music-player"), {
+  initState() {
+    return {
+      isLoggedIn: getCookie("isLoggedIn"),
+      initialMusic: {
         musics: [
           {
             title: "스마트폰 아이콘을 클릭해보세요!",
@@ -44,13 +30,36 @@ class App extends Component {
             artist: "음악 추가와 플레이리스트 생성을 할 수 있습니다.",
           },
         ],
-      });
-      new pageComponent($("main"), {
+      },
+    };
+  }
+  template() {
+    return `
+      <main class=${this.state.isLoggedIn ? "" : "room-dark"}></main>
+      <div id="music-player"></div>
+    `;
+  }
+  addComponent() {
+    let path = window.location.pathname;
+
+    const isPlaylists = path.includes("playlists/");
+    if (isPlaylists && !(path === "/playlists/chart")) {
+      path = matchRoute(this.router, path);
+    }
+
+    const pageComponent = this.router[path];
+
+    if (this.state.isLoggedIn) {
+      const musicPlayer = new MusicPlayer(
+        $("#music-player"),
+        this.state.initialMusic
+      );
+      return new pageComponent($("main"), {
         playerSetState: musicPlayer.setState.bind(musicPlayer),
       });
-    } else {
-      new pageComponent($("main"));
     }
+
+    return new pageComponent($("main"));
   }
 }
 
