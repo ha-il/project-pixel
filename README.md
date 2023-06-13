@@ -27,11 +27,11 @@
 <br/>
 
 ## 4. "당신의 작업실"을 만드는 기술
-**프론트엔드**: JavaScript
-**백엔드**: Express.js
-**데이터베이스**: MongoDB
-**스타일링**: SCSS
-**배포**: Heroku
+- **프론트엔드**: JavaScript
+- **백엔드**: Express.js
+- **데이터베이스**: MongoDB
+- **스타일링**: SCSS
+- **배포**: Heroku
 
 <br/>
 
