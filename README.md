@@ -172,14 +172,21 @@
 
 <br/>
 
-## 8. 수상 실적
+## 8. 프로젝트 개발기
+- [[당신의 작업실] 1. 프로젝트를 시작하게 된 이유](https://ha-il.github.io/side-project/project-pixel/1-motive/)
+- [[당신의 작업실] 2. SPA 프로토타입 제작과 프로젝트로의 적용](https://ha-il.github.io/side-project/project-pixel/2-prototype/)
+- [[당신의 작업실] 3. 개발 환경 구축하기](https://ha-il.github.io/side-project/project-pixel/3-boiler-plate/)
+
+<br/>
+
+## 9. 수상 실적
 | 수상 일자 | 대회명 | 최종 실적 | 관련 URL |
 | :- | :- | :- | :- |
 | 23.06.01  | 노마드코더 멜론 클론코딩 컨테스트 2기 | 준우승 | https://nomadcoders.co/community/thread/7949 |
 
 <br/>
 
-## 9. 라이센스
+## 10. 라이센스
 MIT © 김형우, Inc. See [LICENSE](./LICENSE) for details.
 
 
