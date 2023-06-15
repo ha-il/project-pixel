@@ -32,6 +32,7 @@
 - **데이터베이스**: MongoDB
 - **스타일링**: SCSS
 - **배포**: Heroku
+- **픽셀 아트**: Aseprite
 
 <br/>
 
