@@ -169,7 +169,7 @@
     ```
     npm run dev:server // 서버를 실행합니다.
     ```
-5. "http://localhost:4000/"으로 접속합니다.
+5. http://localhost:4000/ 으로 접속합니다.
 
 <br/>
 
