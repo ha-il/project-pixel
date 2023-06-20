@@ -174,9 +174,16 @@
 <br/>
 
 ## 8. 프로젝트 개발기
+
+- [전체 글 목록](https://ha-il.github.io/categories/project/)
 - [[당신의 작업실] 1. 프로젝트를 시작하게 된 이유](https://ha-il.github.io/side-project/project-pixel/1-motive/)
 - [[당신의 작업실] 2. SPA 프로토타입 제작과 프로젝트로의 적용](https://ha-il.github.io/side-project/project-pixel/2-prototype/)
 - [[당신의 작업실] 3. 개발 환경 구축하기](https://ha-il.github.io/side-project/project-pixel/3-boiler-plate/)
+- [[당신의 작업실] 4. 데이터베이스 연결](https://ha-il.github.io/side-project/project-pixel/4-dataBase/)
+- [[당신의 작업실] 5. 프로젝트 기획과 디자인](https://ha-il.github.io/side-project/project-pixel/5-plan-and-design/)
+- [[당신의 작업실] 6. 요구사항 명세 과정](https://ha-il.github.io/side-project/project-pixel/6-domain/)
+- [[당신의 작업실] 7. 프로젝트 개발 과정 - 쿠키 설정](https://ha-il.github.io/side-project/project-pixel/7-dev-cookie/)
+- [[당신의 작업실] 8. 프로젝트 개발 과정 - prop과 this 바인딩](https://ha-il.github.io/side-project/project-pixel/8-dev-prop-this/)
 
 <br/>
 
