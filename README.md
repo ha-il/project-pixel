@@ -184,7 +184,8 @@
 - [[당신의 작업실] 6. 요구사항 명세 과정](https://ha-il.github.io/side-project/project-pixel/6-domain/)
 - [[당신의 작업실] 7. 프로젝트 개발 과정 - 쿠키 설정](https://ha-il.github.io/side-project/project-pixel/7-dev-cookie/)
 - [[당신의 작업실] 8. 프로젝트 개발 과정 - prop과 this 바인딩](https://ha-il.github.io/side-project/project-pixel/8-dev-prop-this/)
-
+- [[당신의 작업실] 9. 프로젝트 개발 과정 - 정규 표현식과 검색 기능 개선](https://ha-il.github.io/side-project/project-pixel/9-dev-regexp/)
+- [[당신의 작업실] 10. 프로젝트를 마치며](https://ha-il.github.io/side-project/project-pixel/10-ending/)
 <br/>
 
 ## 9. 수상 실적
