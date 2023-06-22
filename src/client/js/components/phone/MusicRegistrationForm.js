@@ -53,12 +53,14 @@ class MusicRegistrationForm extends Component {
         duration,
       } = this.props.musicData;
 
+      const title = $("#title").value.trim();
+      const artist = $("#artist").value.trim();
       const musicData = JSON.stringify({
         youtubeId,
         imageUrl,
         duration,
-        title: $("#title").value,
-        artist: $("#artist").value,
+        title,
+        artist,
       });
 
       const response = await fetch(`/api/musics`, {

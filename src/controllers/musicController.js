@@ -2,7 +2,6 @@ import Music from "../models/Music.js";
 
 export const registerMusic = async (req, res) => {
   const { youtubeId, title, artist, imageUrl, duration } = req.body;
-  const trimTitle = title.trim();
   const isMusicExists = await Music.exists({ youtubeId });
   if (isMusicExists) {
     return res.status(400).send({
@@ -12,7 +11,7 @@ export const registerMusic = async (req, res) => {
   try {
     await Music.create({
       youtubeId,
-      title: trimTitle,
+      title,
       artist,
       imageUrl,
       duration,
