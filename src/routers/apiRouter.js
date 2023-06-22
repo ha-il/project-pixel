@@ -15,7 +15,10 @@ import {
 import {
   addMusicToPlaylist,
   createPlaylist,
+  editTitleAndDescription,
   getPlaylist,
+  removeMusicToPlaylist,
+  removePlaylist,
 } from "../controllers/playlistController.js";
 
 const apiRouter = express.Router();
@@ -35,5 +38,8 @@ apiRouter.get("/musics/search/:searchWord", searchMusic);
 apiRouter.post("/playlists", createPlaylist);
 apiRouter.get("/playlists/:playlistId", getPlaylist);
 apiRouter.post("/playlists/:playlistId", addMusicToPlaylist);
+apiRouter.put("/playlists/:playlistId", removeMusicToPlaylist);
+apiRouter.patch("/playlists/:playlistId", editTitleAndDescription);
+apiRouter.delete("/playlists/:playlistId", removePlaylist);
 
 export default apiRouter;

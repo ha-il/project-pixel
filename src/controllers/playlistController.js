@@ -64,3 +64,53 @@ export const addMusicToPlaylist = async (req, res) => {
       .send({ errorMessage: "곡을 추가하는 과정에서 에러가 발생했습니다." });
   }
 };
+
+export const removeMusicToPlaylist = async (req, res) => {
+  const {
+    params: { playlistId },
+    body: { musicId },
+  } = req;
+
+  try {
+    const music = await Music.findById(musicId);
+    const playlist = await Playlist.findByIdAndUpdate(
+      playlistId,
+      {
+        $pull: {
+          musics: { $in: [music] },
+        },
+      },
+      { new: true }
+    )
+      .populate("owner")
+      .populate("musics");
+
+    return res.status(200).send(playlist);
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(400)
+      .send({ errorMessage: "곡을 삭제하는 과정에서 에러가 발생했습니다." });
+  }
+};
+
+export const editTitleAndDescription = async (req, res) => {
+  const {
+    params: { playlistId },
+    body: { name, description },
+  } = req;
+  const playlist = await Playlist.findByIdAndUpdate(
+    playlistId,
+    { name, description },
+    { new: true }
+  )
+    .populate("owner")
+    .populate("musics");
+  return res.status(200).send(playlist);
+};
+
+export const removePlaylist = async (req, res) => {
+  const { playlistId } = req.params;
+  await Playlist.findByIdAndRemove(playlistId);
+  return res.sendStatus(200);
+};
