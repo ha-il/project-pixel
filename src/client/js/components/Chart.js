@@ -26,7 +26,9 @@ class Chart extends Component {
             <div class="name">인기 차트</div>
             <div class="profileName">Top 10</div>
             <div class="description">재생수 상위 10 곡입니다.</div>
-            <button type="button" class="play-button">재생</button>
+            <div class="playlist-buttons">
+              <button type="button" class="play-button">재생</button>
+            </div>
           </div>
         </div>
         
