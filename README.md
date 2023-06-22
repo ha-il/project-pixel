@@ -122,6 +122,21 @@
 | 홈 화면에서 침대 오브젝트 클릭 → 확인 버튼 클릭 → 로그아웃|
 |![logout](https://github.com/ha-il/project-pixel/assets/108077643/4bf80da8-0d00-42a9-935a-0f1ee641af31)|
 
+### 6.10 플레이리스트 편집 (2023.6.23 추가)
+| 플레이리스트 편집 |
+| :-: | 
+| 플레이리스트 페이지에서 편집 버튼 클릭 → 제목과 설명 입력 → 완료 버튼 클릭 → 편집 완료|
+|![edit-playlist](https://github.com/ha-il/project-pixel/assets/108077643/71fde65b-21c4-4309-a211-3185ce78ae50)|
+### 6.11 플레이리스트 삭제 (2023.6.23 추가)
+| 플레이리스트 삭제 |
+| :-: | 
+| 플레이리스트 페이지에서 편집 버튼 클릭 → 삭제 버튼 클릭 → 플레이리스트 삭제 → 홈 화면 이동|
+|![remove-playlist](https://github.com/ha-il/project-pixel/assets/108077643/fa300550-c953-4bd4-b59c-7aefb1ac0328)|
+### 6.12 플레이리스트 곡 제거 (2023.6.23 추가)
+| 플레이리스트 곡 제거 |
+| :-: | 
+| 최초 렌더링시 플레이리스트 곡 목록 렌더링 → `-` 버튼 클릭 → 플레이리스트에서 곡 제거|
+|![remove-music](https://github.com/ha-il/project-pixel/assets/108077643/9dd9c8fd-8766-4868-9171-6202940cf6f7)|
 <br/>
 
 ## 7. 개발자 환경 실행 방법
@@ -175,7 +190,7 @@
 
 ## 8. 프로젝트 개발기
 
-- [전체 글 목록](https://ha-il.github.io/categories/project/)
+- [[당신의 작업실] 전체 글 목록](https://ha-il.github.io/categories/project/)
 - [[당신의 작업실] 1. 프로젝트를 시작하게 된 이유](https://ha-il.github.io/side-project/project-pixel/1-motive/)
 - [[당신의 작업실] 2. SPA 프로토타입 제작과 프로젝트로의 적용](https://ha-il.github.io/side-project/project-pixel/2-prototype/)
 - [[당신의 작업실] 3. 개발 환경 구축하기](https://ha-il.github.io/side-project/project-pixel/3-boiler-plate/)
@@ -186,6 +201,7 @@
 - [[당신의 작업실] 8. 프로젝트 개발 과정 - prop과 this 바인딩](https://ha-il.github.io/side-project/project-pixel/8-dev-prop-this/)
 - [[당신의 작업실] 9. 프로젝트 개발 과정 - 정규 표현식과 검색 기능 개선](https://ha-il.github.io/side-project/project-pixel/9-dev-regexp/)
 - [[당신의 작업실] 10. 프로젝트를 마치며](https://ha-il.github.io/side-project/project-pixel/10-ending/)
+- [[당신의 작업실] 번외. 리팩터링과 기능 추가](https://ha-il.github.io/side-project/project-pixel/11-refactoring/)
 <br/>
 
 ## 9. 수상 실적
