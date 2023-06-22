@@ -55,7 +55,7 @@ class App extends Component {
         this.state.initialMusic
       );
       return new pageComponent($("main"), {
-        playerSetState: musicPlayer.setState.bind(musicPlayer),
+        playerSetState: musicPlayer.setState,
       });
     }
 

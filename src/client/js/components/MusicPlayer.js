@@ -248,12 +248,12 @@ class MusicPlayer extends Component {
     });
   }
 
-  setState(newState) {
+  setState = (newState) => {
     this.state = { ...this.state, ...newState };
     this.render();
     this.setEvent();
     this.onYouTubeIframeAPIReady();
-  }
+  };
 }
 
 export default MusicPlayer;
