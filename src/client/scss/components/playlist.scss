@@ -3,7 +3,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-
   padding: 0 10rem;
   .back-button {
     position: absolute;
@@ -19,7 +18,6 @@
     color: #fffc40;
   }
   .info-container {
-    width: 100%;
     display: flex;
     margin: 2rem 0;
     padding: 2rem;
@@ -46,7 +44,8 @@
       }
     }
     .info {
-      padding: 0rem 2rem;
+      padding-left: 2rem;
+      height: 208px;
       .name {
         font-size: 2rem;
         font-weight: 700;
@@ -63,20 +62,60 @@
         margin-top: 1.5rem;
         margin-bottom: 1rem;
       }
-      .play-button {
-        border: none;
-        background-color: white;
-        color: $bg-color-room;
+      .playlist-buttons {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 48px;
-        height: 48px;
-        border-radius: 4px;
-        cursor: pointer;
+        .play-button,
+        .edit-complete-button {
+          margin-right: 8px;
+          border: none;
+          background-color: white;
+          color: $bg-color-room;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 48px;
+          height: 48px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        .play-button:hover,
+        .edit-complete-button:hover {
+          background-color: #fffc40;
+        }
+        .edit-button,
+        .edit-cancle-button {
+          background-color: transparent;
+          border: none;
+          color: white;
+          width: 48px;
+          height: 48px;
+          cursor: pointer;
+        }
+        .edit-button:hover,
+        .edit-cancle-button:hover {
+          color: #fffc40;
+        }
+
+        .remove-playlist-button {
+          background-color: transparent;
+          border: none;
+          color: #fffc40;
+          width: 48px;
+          height: 48px;
+          cursor: pointer;
+        }
+        .remove-playlist-button:hover {
+          color: #df3e23;
+        }
       }
-      .play-button:hover {
-        background-color: #fffc40;
+    }
+    #playlist-edit-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      input {
+        border: none;
+        padding: 4px;
       }
     }
   }
@@ -93,7 +132,6 @@
       .image {
         width: 48px;
         height: 48px;
-        background-color: tomato;
         margin-right: 1rem;
       }
       .title {
@@ -106,7 +144,8 @@
         position: absolute;
         right: 2rem;
       }
-      .add-music-button {
+      .add-music-button,
+      .remove-music-button {
         border: none;
         background-color: white;
         color: $bg-color-room;
@@ -118,7 +157,8 @@
         border-radius: 4px;
         cursor: pointer;
       }
-      .add-music-button:hover {
+      .add-music-button:hover,
+      .remove-music-button:hover {
         background-color: #fffc40;
       }
     }
@@ -142,24 +182,30 @@
         width: 300px;
       }
     }
-    input[type="submit"] {
+    input[type="submit"],
+    input[type="button"] {
       border: none;
       background-color: white;
       color: $bg-color-room;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 32px;
+
       height: 20px;
       margin-left: 8px;
       border-radius: 4px;
       cursor: pointer;
     }
-    input[type="submit"]:hover {
+    input[type="submit"]:hover,
+    input[type="button"]:hover {
       background-color: #fffc40;
     }
   }
   .music-list-title {
     padding: 0rem 2rem 0 2rem;
+  }
+
+  .hidden {
+    visibility: hidden;
   }
 }

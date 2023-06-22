@@ -15,7 +15,6 @@
   justify-content: space-between;
   padding: 0 1rem;
   margin: 0 1rem;
-  cursor: pointer;
   .music-info {
     display: flex;
     align-items: center;
@@ -59,6 +58,12 @@
         font-size: $font-size-200;
         margin: 0px 0.5rem;
       }
+      button {
+        cursor: pointer;
+      }
+      button:hover {
+        color: #fffc40;
+      }
     }
 
     .player-bar {
@@ -74,9 +79,26 @@
       }
     }
   }
-  .volume-controls {
+  .list-volume-controls {
     display: flex;
+    width: 240px;
     align-items: center;
+    justify-content: flex-end;
+    i {
+      font-size: 1.25rem;
+    }
+    #mute-icon {
+      padding: 4px;
+    }
+    button {
+      cursor: pointer;
+    }
+    button:hover {
+      color: #fffc40;
+    }
+    #volume {
+      width: 50%;
+    }
   }
   button {
     background-color: inherit;
