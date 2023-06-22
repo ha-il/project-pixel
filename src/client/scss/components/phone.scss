@@ -101,10 +101,63 @@
       }
       #playlist-creation {
         background-color: #59c135;
+        position: relative;
+      }
+      #playlist-creation:hover {
+        background-color: #9cdb43;
+      }
+      #playlist-creation:hover .app-description {
+        animation: spinUp 0.3s ease-in forwards;
       }
 
       #music-registration {
         background-color: #e86a73;
+        position: relative;
+      }
+      #music-registration:hover {
+        background-color: #f5a097;
+      }
+      #music-registration:hover .app-description {
+        animation: spinUp 0.3s ease-in forwards;
+      }
+      .app-description {
+        background-color: #b3b9d1;
+        font-size: 12px;
+        position: absolute;
+        width: 80px;
+        height: 32px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        visibility: hidden;
+        opacity: 0;
+        transform: rotate(180deg);
+        top: 0px;
+      }
+      .four-letters {
+        width: 64px;
+      }
+      @keyframes spinUp {
+        0% {
+          top: 0px;
+          transform: rotate(180deg);
+          visibility: hidden;
+          opacity: 0;
+        }
+        50% {
+          top: -20px;
+          transform: rotate(90deg);
+          visibility: unset;
+          opacity: 0.5;
+        }
+        100% {
+          top: -40px;
+          transform: rotate(0deg);
+          visibility: unset;
+          opacity: 1;
+        }
       }
     }
     .back-button {

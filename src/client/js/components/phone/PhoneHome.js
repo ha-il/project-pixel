@@ -34,9 +34,14 @@ class PhoneHome extends Component {
       
       <div class="dock">
         <div id="playlist-creation" class="phone-app">
+          <div class="app-description">
+            <span>플레이리스트</span>
+            <span>생성</span>
+          </div>
           <i class="fa-solid fa-list"></i>
         </div>
         <div id="music-registration" class="phone-app">
+          <div class="app-description four-letters">음악 추가</div>
           <i class="fa-solid fa-music"></i>
         </div>
         <div class="phone-app">X</div>
