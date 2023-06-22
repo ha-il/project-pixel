@@ -6,6 +6,11 @@ import PlaylistCreation from "./PlaylistCreation.js";
 import UrlRegistration from "./UrlRegistration.js";
 
 class PhoneHome extends Component {
+  initState() {
+    return {
+      loggedInUser: getCookie("loggedInUser"),
+    };
+  }
   template() {
     return `
       <div class="header">
@@ -23,7 +28,7 @@ class PhoneHome extends Component {
         <div class="date">${getCurrentDate()}</div>
         <div class="time">${getCurrentTime()}</div>
         <div class="greeting">Hello, ${
-          getCookie("loggedInUser").profileName
+          this.state.loggedInUser.profileName
         } !</div>
       </div>
       
