@@ -7,6 +7,7 @@ class MusicPlayer extends Component {
   done = false;
   intervalId = 123;
   volume = 1;
+  visible = false;
 
   init() {
     this.initYoutubeApi();
@@ -34,12 +35,11 @@ class MusicPlayer extends Component {
     return {
       musics,
       currentMusic: musics[0],
-      visible: false,
     };
   }
   template() {
     return `
-      <div id="music-list" class=${this.state.visible ? "visible" : ""}>
+      <div id="music-list" class=${this.visible ? "visible" : ""}>
         <div class="container">
           <div id="player"></div>
           <div id="list-container">
@@ -90,7 +90,10 @@ class MusicPlayer extends Component {
             <span id="total-time">00:00</span>
           </div>
         </div>
-        <div class=volume-controls>
+        <div class=list-volume-controls>
+          <button id="list-button" type="button">
+            <i class="fa-solid fa-list"></i>
+          </button>
           <button id="mute" type="button">
             <i id="mute-icon" class="fa-solid fa-volume-high"></i>
           </button>
@@ -113,7 +116,6 @@ class MusicPlayer extends Component {
 
   onPlayerReady(event) {
     clearInterval(this.intervalId);
-
     toggleClass($("#play-icon"), "fa-play", "fa-pause");
     $("#volume").value = event.target.getVolume();
     $("#volume").style.backgroundSize =
@@ -183,12 +185,16 @@ class MusicPlayer extends Component {
       if (e.target.closest(".music-container")) {
         const { id } = e.target.closest(".music-container");
         const music = this.findMusicByYoutubeId(id);
-        this.setState({ currentMusic: music, visible: true });
+        this.setState({ currentMusic: music });
       }
     });
-    $("#music-controls").addEventListener("click", (e) => {
-      if (e.target.id === "music-controls" || e.target.id === "play-contorls") {
-        $("#music-list").classList.toggle("visible");
+    $("#list-button").addEventListener("click", (e) => {
+      if (this.visible) {
+        this.visible = false;
+        $("#music-list").classList.remove("visible");
+      } else {
+        this.visible = true;
+        $("#music-list").classList.add("visible");
       }
     });
 
@@ -196,10 +202,10 @@ class MusicPlayer extends Component {
       let playerState = this.player.getPlayerState();
 
       if (playerState === 1) {
-        toggleClass($("#play-icon"), "fa-pause", "fa-play");
+        $("#play-icon").classList.replace("fa-pause", "fa-play");
         return this.player.pauseVideo();
       } else {
-        toggleClass($("#play-icon"), "fa-play", "fa-pause");
+        $("#play-icon").classList.replace("fa-play", "fa-pause");
         return this.player.playVideo();
       }
     });
@@ -215,18 +221,21 @@ class MusicPlayer extends Component {
       }
       this.setState({
         currentMusic: this.state.musics[currentIndex - 1],
-        visible: true,
       });
     });
     $("#mute").addEventListener("click", (e) => {
       let isMuted = this.player.isMuted();
       if (isMuted) {
-        toggleClass($("#mute-icon"), "fa-volume-xmark", "fa-volume-high");
+        $("#mute-icon").classList.replace("fa-volume-xmark", "fa-volume-high");
         $("#volume").value = this.volume;
+        const { value, max } = $("#volume");
+        $("#volume").style.backgroundSize =
+          Math.floor((value * 100) / max) + "% 100%";
         this.player.unMute();
       } else {
-        toggleClass($("#mute-icon"), "fa-volume-high", "fa-volume-xmark");
+        $("#mute-icon").classList.replace("fa-volume-high", "fa-volume-xmark");
         $("#volume").value = 0;
+        $("#volume").style.backgroundSize = "0% 100%";
         this.player.mute();
       }
       return;
@@ -235,6 +244,11 @@ class MusicPlayer extends Component {
       const { value, max } = e.target;
       e.target.style.backgroundSize =
         Math.floor((value * 100) / max) + "% 100%";
+      if (value === "0") {
+        $("#mute-icon").classList.replace("fa-volume-high", "fa-volume-xmark");
+      } else {
+        $("#mute-icon").classList.replace("fa-volume-xmark", "fa-volume-high");
+      }
       this.volume = value;
       this.player.setVolume(value * 100);
     });
