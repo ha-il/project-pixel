@@ -5,8 +5,16 @@ import {
   convertTimeToMilliseconds,
 } from "../utils/time.js";
 import Home from "./Home.js";
+import CurrentPlaylist from "./playlist/CurrentPlaylist.js";
+import PlaylistEditForm from "./playlist/PlaylistEditForm.js";
 
 class Playlist extends Component {
+  initState() {
+    return {
+      recommendMusics: [],
+      isSearched: false,
+    };
+  }
   async fetchData() {
     const playlistId = window.location.pathname.slice(11);
 
@@ -17,7 +25,11 @@ class Playlist extends Component {
     const chartMusics = await chartResponse.json();
 
     if (chartResponse.ok && playlistResponse.ok) {
-      return this.setState({ chartMusics, playlist });
+      return this.setState({
+        recommendMusics: chartMusics,
+        chartMusics,
+        playlist,
+      });
     }
   }
 
@@ -25,34 +37,8 @@ class Playlist extends Component {
     return `
       <div class="playlist-container">
         <button type="button" class="back-button">↩</button>
-        <div class="info-container">
-          ${
-            this.state.playlist
-              ? this.state.playlist.musics[0]
-                ? `<img class="image" src="${this.state.playlist.musics[0].imageUrl}"/>`
-                : '<div class="image"><i class="fa-solid fa-music"></i></div>'
-              : '<div class="image"><i class="fa-solid fa-music"></i></div>'
-          }
-          <div class="info">
-            <div class="name">${
-              this.state.playlist
-                ? this.state.playlist.name
-                : "플레이리스트를 불러오고 있습니다..."
-            }</div>
-            <div class="profileName">${
-              this.state.playlist
-                ? this.state.playlist.owner.profileName
-                : "..."
-            }</div>
-            <div class="duration">${
-              this.state.playlist ? this.state.playlist.musics.length : "0"
-            }곡</div>
-            <div class="description">${
-              this.state.playlist ? this.state.playlist.description : "..."
-            }</div>
-            <button type="button" class="play-button">재생</button>
-          </div>
-        </div>
+        <div class="info-container"></div>
+        
         <div class="current-music-list music-list-container">
           ${
             this.state.playlist
@@ -65,6 +51,9 @@ class Playlist extends Component {
                         <img class="image" src="${music.imageUrl}"/>
                         <div class="title">${music.title}</div>
                         <div class="artist">${music.artist}</div>
+                        <button type="button" class="remove-music-button" data-musicid=${
+                          music._id
+                        }>-</button>
                         <div class="duration">${convertMillisecondsToTime(
                           convertTimeToMilliseconds(music.duration)
                         )}</div>
@@ -89,6 +78,9 @@ class Playlist extends Component {
               />
             </div>
             <input type="submit" value="검색" />
+            <input type="button" id="backChartBtn" value="인기차트" class=${
+              this.state.isSearched ? "" : "hidden"
+            } />
           </form>
         </div>
         <div class="music-list-title">${
@@ -96,8 +88,8 @@ class Playlist extends Component {
         }</div>
         <div class="recommended-music-list music-list-container">
           ${
-            this.state.chartMusics
-              ? this.state.chartMusics
+            this.state.recommendMusics
+              ? this.state.recommendMusics
                   .map((music) => {
                     return `
                       <div class="music-container">
@@ -127,6 +119,13 @@ class Playlist extends Component {
         return true;
       }
     }
+  }
+  addComponent() {
+    const { playerSetState } = this.props;
+    return new CurrentPlaylist($(".info-container"), {
+      playlist: this.state.playlist,
+      playerSetState,
+    });
   }
   setEvent() {
     $(".back-button").addEventListener("click", (e) => {
@@ -158,6 +157,28 @@ class Playlist extends Component {
         }
       }
     });
+    $(".current-music-list").addEventListener("click", async (e) => {
+      if (e.target.classList.contains("remove-music-button")) {
+        const musicId = e.target.dataset.musicid;
+
+        const response = await fetch(
+          `/api/playlists/${this.state.playlist._id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ musicId }),
+          }
+        );
+
+        const playlist = await response.json();
+
+        if (response.ok) {
+          this.setState({ playlist });
+        }
+      }
+    });
     $(".play-button").addEventListener("click", (e) => {
       if (this.state.playlist.musics.length === 0) return;
       const { playerSetState } = this.props;
@@ -174,8 +195,15 @@ class Playlist extends Component {
       if (response.ok) {
         const data = await response.json();
         const listTitle = `"${searchWord}" 검색 결과: ${data.length} 곡`;
-        this.setState({ chartMusics: data, listTitle });
+        this.setState({ recommendMusics: data, listTitle, isSearched: true });
       }
+    });
+    $("#backChartBtn").addEventListener("click", () => {
+      this.setState({
+        recommendMusics: this.state.chartMusics,
+        listTitle: "인기차트 곡 추가하기",
+        isSearched: false,
+      });
     });
   }
 }
