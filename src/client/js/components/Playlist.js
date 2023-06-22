@@ -71,6 +71,11 @@ class Playlist extends Component {
   }
 
   setEvent() {
+    window.addEventListener("popstate", (e) => {
+      window.history.pushState(null, "", "/");
+      const { playerSetState } = this.props;
+      new Home($("main"), { playerSetState });
+    });
     $(".back-button").addEventListener("click", (e) => {
       window.history.pushState(null, "", "/");
       const { playerSetState } = this.props;
