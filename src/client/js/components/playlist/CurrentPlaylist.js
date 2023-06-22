@@ -34,7 +34,7 @@ class CurrentPlaylist extends Component {
   setEvent() {
     $(".edit-button").addEventListener("click", () => {
       const { playlist, playerSetState } = this.props;
-      return new PlaylistEditForm($(".info-container"), {
+      return new PlaylistEditForm($("#info-container"), {
         playlist,
         playerSetState,
       });

@@ -49,7 +49,7 @@ class PlaylistEditForm extends Component {
   setEvent() {
     const { playlist, playerSetState } = this.props;
     $(".edit-cancle-button").addEventListener("click", () => {
-      return new CurrentPlaylist($(".info-container"), {
+      return new CurrentPlaylist($("#info-container"), {
         playlist,
         playerSetState,
       });
@@ -72,7 +72,7 @@ class PlaylistEditForm extends Component {
 
       const newPlaylist = await response.json();
 
-      return new CurrentPlaylist($(".info-container"), {
+      return new CurrentPlaylist($("#info-container"), {
         playlist: newPlaylist,
         playerSetState,
       });
