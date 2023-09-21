@@ -12,7 +12,7 @@
 
 ## 2. "당신의 작업실"을 만드는 사람
 
-|[김형우](https://github.com/sungwoo-shin)|TMI|
+|[김형우](https://github.com/ha-il)|TMI|
 | :-: | - |
 |<img src="https://avatars.githubusercontent.com/ha-il" width=150px><br />|- 프론트엔드 개발자를 지망하고 있습니다 🧑🏻‍💻<br />- 바닐라 자바스크립트로 코딩하는 것을 좋아합니다 🍨 <br />- 픽셀아트를 좋아하고 취미로 제작하고 있습니다 👾<br />- https://www.instagram.com/hail.pixel/<br />- 달리기를 좋아해서 하프 마라톤에 참가한 경험이 있습니다 🏃🏻‍♂️<br />- 일본어를 전공했습니다 🗼|
 
@@ -37,7 +37,7 @@
 <br/>
 
 ## 5. 디렉터리 구조
-```
+```shell
 ├── images # 프로젝트 이미지 파일
 ├── src
 │   ├── client
